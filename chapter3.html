@@ -3,18 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>الفصل الثالث | قراءات سيكولوجية | Aya Gaber</title>
+    <title>قراءات سيكولوجية | الفصول 3,4,5,7 | Aya Gaber</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s;
-        }
-
-        /* خلفية مموجة متدرجة بيبي بلو وبيج */
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.2s, color 0.2s, border-color 0.2s; }
         body {
             font-family: 'Cairo', 'Inter', sans-serif;
             background: linear-gradient(135deg, #d4e4f7 0%, #f9e6d5 50%, #c7dfef 100%);
@@ -24,7 +17,6 @@
             scroll-behavior: smooth;
             padding-bottom: 3rem;
         }
-        
         body::before {
             content: "";
             position: fixed;
@@ -38,489 +30,203 @@
             pointer-events: none;
             z-index: 0;
         }
-
-        /* Dark Mode - تحسين وضوح الكلام */
         body.dark-mode {
             background: linear-gradient(135deg, #121821 0%, #1e1a1f 100%);
             color: #f0ece8;
         }
-        body.dark-mode::before {
-            opacity: 0.08;
-        }
-        body.dark-mode .glass-card, 
-        body.dark-mode .quiz-card,
-        body.dark-mode .translation-section {
+        body.dark-mode::before { opacity: 0.08; }
+        body.dark-mode .quiz-card, body.dark-mode .translation-section {
             background: rgba(25, 28, 38, 0.7);
             backdrop-filter: blur(14px);
             border: 1px solid rgba(210, 190, 210, 0.2);
-            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.4);
         }
-        body.dark-mode .quiz-card {
-            background: rgba(30, 28, 38, 0.75);
-        }
-        body.dark-mode .question-text {
-            color: #f5eee8;
-        }
-        body.dark-mode .option {
-            background: rgba(45, 40, 55, 0.8);
-            border-color: rgba(210, 190, 210, 0.25);
-        }
-        body.dark-mode .option label {
-            color: #f2e8e2;
-        }
-        body.dark-mode .feedback.correct {
-            background: rgba(40, 70, 50, 0.7);
-            color: #c8f0c0;
-            border-right-color: #7fcc7a;
-        }
-        body.dark-mode .feedback.wrong {
-            background: rgba(90, 50, 55, 0.7);
-            color: #ffcdc2;
-            border-right-color: #e28b6f;
-        }
-        body.dark-mode .btn-submit {
-            background: linear-gradient(95deg, #5e6e85, #7b6b78);
-        }
-        body.dark-mode .trans-input {
-            background: rgba(35, 30, 45, 0.85);
-            border-color: rgba(220, 200, 220, 0.3);
-            color: #f0e6de;
-        }
-        body.dark-mode .footer-design {
-            color: #cfb9cd;
-        }
-        body.dark-mode .trans-item {
-            background: rgba(40, 35, 48, 0.65);
-        }
+        body.dark-mode .quiz-card { background: rgba(30, 28, 38, 0.75); }
+        body.dark-mode .question-text { color: #f5eee8; }
+        body.dark-mode .option { background: rgba(45, 40, 55, 0.8); border-color: rgba(210, 190, 210, 0.25); }
+        body.dark-mode .option label { color: #f2e8e2; }
+        body.dark-mode .feedback.correct { background: rgba(40, 70, 50, 0.7); color: #c8f0c0; border-right-color: #7fcc7a; }
+        body.dark-mode .feedback.wrong { background: rgba(90, 50, 55, 0.7); color: #ffcdc2; border-right-color: #e28b6f; }
+        body.dark-mode .btn-submit { background: linear-gradient(95deg, #5e6e85, #7b6b78); }
+        body.dark-mode .trans-input { background: rgba(35, 30, 45, 0.85); border-color: rgba(220, 200, 220, 0.3); color: #f0e6de; }
+        body.dark-mode .footer-design { color: #cfb9cd; }
+        body.dark-mode .trans-item { background: rgba(40, 35, 48, 0.65); }
+        body.dark-mode .tab-btn { background: rgba(40, 35, 48, 0.7); color: #dfd4cb; }
+        body.dark-mode .tab-btn.active { background: linear-gradient(100deg, #6f7f98, #9b7e8b); color: #f5ede5; }
 
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem 4rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* زر الوضع المظلم */
+        .container { max-width: 1300px; margin: 0 auto; padding: 2rem 1.5rem 4rem; position: relative; z-index: 2; }
         .dark-toggle {
-            position: fixed;
-            top: 1.2rem;
-            left: 1.5rem;
-            background: rgba(255, 250, 245, 0.75);
-            backdrop-filter: blur(12px);
-            border-radius: 3rem;
-            padding: 0.5rem 1.2rem;
-            font-weight: 600;
-            border: 1px solid rgba(210, 190, 175, 0.6);
-            cursor: pointer;
-            z-index: 100;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: inherit;
+            position: fixed; top: 1.2rem; left: 1.5rem;
+            background: rgba(255, 250, 245, 0.75); backdrop-filter: blur(12px); border-radius: 3rem;
+            padding: 0.5rem 1.2rem; font-weight: 600; border: 1px solid rgba(210, 190, 175, 0.6);
+            cursor: pointer; z-index: 100; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;
         }
-        body.dark-mode .dark-toggle {
-            background: rgba(40, 35, 50, 0.8);
-            border-color: rgba(190, 160, 180, 0.5);
-            color: #f3e6dd;
+        body.dark-mode .dark-toggle { background: rgba(40, 35, 50, 0.8); border-color: rgba(190, 160, 180, 0.5); color: #f3e6dd; }
+        .hero { text-align: center; margin-bottom: 2rem; }
+        .hero h1 { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, #5588b1, #c28b6f, #7fa5c2); background-clip: text; -webkit-background-clip: text; color: transparent; }
+        .deco-line { width: 100px; height: 3px; background: linear-gradient(90deg, #b1d0e8, #f0cdb0, #9bc1db); margin: 0.8rem auto 0; border-radius: 4px; }
+        .tabs { display: flex; justify-content: center; gap: 0.8rem; margin: 2rem 0 2rem; flex-wrap: wrap; }
+        .tab-btn {
+            background: rgba(255, 250, 245, 0.65); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,240,0.6);
+            padding: 0.7rem 1.5rem; border-radius: 3rem; font-size: 1rem; font-weight: 700; cursor: pointer;
+            color: #4a5b6e;
         }
-
-        .hero {
-            text-align: center;
-            margin-bottom: 2.2rem;
-        }
-        .hero h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #5588b1, #c28b6f, #7fa5c2);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-        .hero p {
-            font-size: 1rem;
-            color: #5d6e7e;
-            font-weight: 500;
-        }
-        body.dark-mode .hero p {
-            color: #cdc2b8;
-        }
-        .deco-line {
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, #b1d0e8, #f0cdb0, #9bc1db);
-            margin: 0.8rem auto 0;
-            border-radius: 4px;
-        }
-
-        /* الكاردات الزجاجية */
+        .tab-btn.active { background: linear-gradient(100deg, #aabfd9, #c7ae9a); color: #2d2b28; border-color: transparent; box-shadow: 0 5px 12px rgba(0,0,0,0.1); }
+        .chapter-section { display: none; animation: fadeIn 0.3s ease; }
+        .chapter-section.active-chapter { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; transform: translateY(0);} }
         .quiz-card, .translation-section {
-            background: rgba(255, 250, 245, 0.5);
-            backdrop-filter: blur(12px);
-            border-radius: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 250, 245, 0.5); backdrop-filter: blur(12px); border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08);
         }
-        .quiz-card {
-            padding: 1.6rem 2rem;
-            margin-bottom: 1.8rem;
-        }
-        .question-text {
-            font-size: 1.28rem;
-            font-weight: 700;
-            margin-bottom: 1.4rem;
-            display: flex;
-            align-items: baseline;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-            color: #2e3b3e;
-        }
-        .q-num {
-            background: rgba(210, 180, 160, 0.65);
-            backdrop-filter: blur(4px);
-            padding: 0.2rem 0.9rem;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #4a3a2c;
-        }
-        body.dark-mode .q-num {
-            background: rgba(110, 90, 115, 0.7);
-            color: #e6d5ca;
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .option {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 0.7rem 1rem;
-            background: rgba(255, 250, 245, 0.75);
-            backdrop-filter: blur(4px);
-            border-radius: 1.2rem;
-            border: 1px solid rgba(255, 240, 230, 0.9);
-            cursor: pointer;
-        }
-        .option:hover {
-            background: rgba(255, 245, 235, 0.95);
-            transform: scale(0.99);
-        }
-        .option input {
-            accent-color: #9bbdd4;
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-        }
-        .option label {
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            flex: 1;
-        }
-
-        .feedback {
-            margin-top: 0.8rem;
-            padding: 0.8rem 1rem;
-            border-radius: 1.2rem;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            background: rgba(250, 245, 240, 0.85);
-            backdrop-filter: blur(8px);
-        }
-        .feedback.correct {
-            border-right: 5px solid #6cac70;
-            color: #2a6b2f;
-        }
-        .feedback.wrong {
-            border-right: 5px solid #d98467;
-            color: #ab5e4b;
-        }
-        body.dark-mode .feedback.correct {
-            color: #caf0c5;
-        }
-        body.dark-mode .feedback.wrong {
-            color: #ffcdc2;
-        }
-
-        /* زر التحقق (Check) بنور متدرج مموج رايح جاي */
+        .quiz-card { padding: 1.6rem 2rem; margin-bottom: 1.8rem; }
+        .question-text { font-size: 1.28rem; font-weight: 700; margin-bottom: 1.4rem; display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; color: #2e3b3e; }
+        .q-num { background: rgba(210, 180, 160, 0.65); backdrop-filter: blur(4px); padding: 0.2rem 0.9rem; border-radius: 40px; font-size: 0.8rem; font-weight: 700; color: #4a3a2c; }
+        .options { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem; }
+        .option { display: flex; align-items: center; gap: 0.8rem; padding: 0.7rem 1rem; background: rgba(255, 250, 245, 0.75); backdrop-filter: blur(4px); border-radius: 1.2rem; border: 1px solid rgba(255, 240, 230, 0.9); cursor: pointer; }
+        .option:hover { background: rgba(255, 245, 235, 0.95); transform: scale(0.99); }
+        .option input { accent-color: #9bbdd4; width: 18px; cursor: pointer; }
+        .option label { font-size: 1rem; font-weight: 500; cursor: pointer; flex: 1; }
+        .feedback { margin-top: 0.8rem; padding: 0.8rem 1rem; border-radius: 1.2rem; font-size: 0.95rem; background: rgba(250, 245, 240, 0.85); backdrop-filter: blur(8px); }
+        .feedback.correct { border-right: 5px solid #6cac70; color: #2a6b2f; }
+        .feedback.wrong { border-right: 5px solid #d98467; color: #ab5e4b; }
         .btn-submit {
-            background: linear-gradient(100deg, #aabfd9, #c7ae9a);
-            border: none;
-            padding: 0.65rem 1.8rem;
-            border-radius: 2.5rem;
-            font-weight: 700;
-            color: #2f2a24;
-            font-size: 0.9rem;
-            cursor: pointer;
-            font-family: inherit;
-            transition: 0.25s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            animation: gentleWave 2s ease-in-out infinite;
-            background-size: 150% auto;
+            background: linear-gradient(100deg, #aabfd9, #c7ae9a); border: none; padding: 0.65rem 1.8rem;
+            border-radius: 2.5rem; font-weight: 700; color: #2f2a24; font-size: 0.9rem; cursor: pointer;
+            animation: gentleWave 2s ease-in-out infinite; background-size: 150% auto;
         }
-        @keyframes gentleWave {
-            0% { background-position: 0% 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.05);}
-            50% { background-position: 100% 50%; box-shadow: 0 4px 14px rgba(90, 70, 60, 0.15); transform: scale(1.01);}
-            100% { background-position: 0% 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.05);}
-        }
-        .btn-submit:hover {
-            transform: scale(0.97);
-            background: linear-gradient(100deg, #95acc9, #b59881);
-            animation: none;
-        }
-        body.dark-mode .btn-submit {
-            background: linear-gradient(100deg, #5f6f88, #8e7582);
-            color: #f2ece5;
-        }
-
-        /* قسم الترجمة زجاجي */
-        .translation-section {
-            padding: 2rem;
-            margin-top: 2rem;
-            backdrop-filter: blur(14px);
-        }
-        .section-title {
-            font-size: 1.7rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-right: 4px solid #9bbdd4;
-            padding-right: 1rem;
-        }
-        .trans-item {
-            background: rgba(255, 252, 248, 0.6);
-            backdrop-filter: blur(8px);
-            margin-bottom: 1.6rem;
-            padding: 1rem 1.3rem;
-            border-radius: 1.5rem;
-            border: 1px solid rgba(255,245,235,0.7);
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        .trans-prompt {
-            font-weight: 700;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        /* الأسهم الشفافة الشيك */
-        .trans-prompt i {
-            background: rgba(180, 200, 220, 0.35);
-            backdrop-filter: blur(4px);
-            padding: 0.4rem;
-            border-radius: 50%;
-            font-size: 0.9rem;
-            color: #5b7f9e;
-        }
-        body.dark-mode .trans-prompt i {
-            background: rgba(140, 120, 150, 0.4);
-            color: #d4bfe0;
-        }
-        .trans-input {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border-radius: 1.2rem;
-            border: 1px solid #e2cfc2;
-            background: rgba(255, 252, 248, 0.9);
-            font-family: 'Inter', monospace;
-            resize: vertical;
-        }
-        .trans-feedback {
-            font-size: 0.85rem;
-            padding: 0.2rem 0;
-        }
-        .trans-btn {
-            background: linear-gradient(100deg, #aabfd9, #c7ae9a);
-            border: none;
-            padding: 0.45rem 1.4rem;
-            border-radius: 2rem;
-            font-weight: 600;
-            color: #2c2824;
-            cursor: pointer;
-            align-self: flex-start;
-            transition: 0.2s;
-            animation: gentleWave 2s ease-in-out infinite;
-            background-size: 150% auto;
-        }
-        .trans-btn:hover {
-            transform: scale(0.96);
-            animation: none;
-        }
-        body.dark-mode .trans-btn {
-            background: linear-gradient(100deg, #5f6f88, #8e7582);
-            color: #f0e9e2;
-        }
-
-        /* توقيع Aya Gaber متدرج وشيك */
-        .footer-design {
-            margin-top: 3rem;
-            text-align: center;
-            font-size: 1.1rem;
-            font-weight: 600;
-            padding-top: 1rem;
-            letter-spacing: 0.5px;
-            background: linear-gradient(135deg, #719ec2, #4c3232, #74c3ff);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            animation: gentleGlow 3s ease infinite;
-        }
-        @keyframes gentleGlow {
-            0% { opacity: 0.8; text-shadow: 0 0 0px rgba(115, 145, 175, 0.2);}
-            50% { opacity: 1; text-shadow: 0 0 8px rgba(165, 135, 115, 0.3);}
-            100% { opacity: 0.8; text-shadow: 0 0 0px rgba(115, 145, 175, 0.2);}
-        }
-        body.dark-mode .footer-design {
-            background: linear-gradient(135deg, #c2b0e0, #e0bc9e, #adc6e6);
-            background-clip: text;
-            -webkit-background-clip: text;
-        }
-
-        @media (max-width: 680px) {
-            .container { padding: 1rem; }
-            .quiz-card { padding: 1.2rem; }
-            .hero h1 { font-size: 1.8rem; }
-        }
+        @keyframes gentleWave { 0% { background-position: 0% 50%;} 50% { background-position: 100% 50%; transform: scale(1.01);} 100% { background-position: 0% 50%;} }
+        .btn-submit:hover { transform: scale(0.97); animation: none; }
+        .translation-section { padding: 2rem; margin-top: 2rem; }
+        .section-title { font-size: 1.7rem; font-weight: 700; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; border-right: 4px solid #9bbdd4; padding-right: 1rem; }
+        .trans-item { background: rgba(255, 252, 248, 0.6); backdrop-filter: blur(8px); margin-bottom: 1.6rem; padding: 1rem 1.3rem; border-radius: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
+        .trans-prompt { font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .trans-prompt i { background: rgba(180, 200, 220, 0.35); backdrop-filter: blur(4px); padding: 0.4rem; border-radius: 50%; }
+        .trans-input { width: 100%; padding: 0.8rem 1rem; border-radius: 1.2rem; border: 1px solid #e2cfc2; background: rgba(255, 252, 248, 0.9); font-family: monospace; }
+        .trans-btn { background: linear-gradient(100deg, #aabfd9, #c7ae9a); border: none; padding: 0.45rem 1.4rem; border-radius: 2rem; font-weight: 600; cursor: pointer; align-self: flex-start; animation: gentleWave 2s ease infinite; }
+        .footer-design { margin-top: 3rem; text-align: center; font-size: 1.1rem; font-weight: 600; background: linear-gradient(135deg, #6f9bc0, #c9a989, #8eb3cf); background-clip: text; -webkit-background-clip: text; color: transparent; animation: gentleGlow 3s ease infinite; }
+        @keyframes gentleGlow { 0% { opacity: 0.8;} 50% { opacity: 1; text-shadow: 0 0 6px rgba(165, 135, 115, 0.2);} 100% { opacity: 0.8;} }
+        @media (max-width: 680px) { .container { padding: 1rem; } .quiz-card { padding: 1.2rem; } .tab-btn { padding: 0.4rem 1rem; font-size: 0.8rem; } }
     </style>
 </head>
 <body>
 <button class="dark-toggle" id="darkModeToggle"><i class="fas fa-moon"></i> الوضع المظلم</button>
 <div class="container">
     <div class="hero">
-        <h1>قراءات سيكولوجية</h1>
-        <p>الفصل الثالث: التخلف العقلي (Mental Retardation)</p>
+        <h1>📘 قراءات سيكولوجية</h1>
+        <p>الفصل الثالث: التخلف العقلي | الفصل الرابع: صعوبات التعلم | الفصل الخامس: الإعاقة البصرية | الفصل السابع: اضطرابات التواصل</p>
         <div class="deco-line"></div>
     </div>
-
-    <div id="quizContainer"></div>
-
-    <!-- قسم الترجمة -->
-    <div class="translation-section">
-        <div class="section-title"><i class="fas fa-language"></i> تدريبات الترجمة</div>
-        <div id="translationList"></div>
+    <div class="tabs">
+        <button class="tab-btn active" data-chapter="3">🧠 الفصل الثالث</button>
+        <button class="tab-btn" data-chapter="4">📚 الفصل الرابع</button>
+        <button class="tab-btn" data-chapter="5">👁️ الفصل الخامس</button>
+        <button class="tab-btn" data-chapter="7">🗣️ الفصل السابع</button>
     </div>
-    
-    <div class="footer-design">
-        Aya Gaber
-    </div>
+    <div id="chapter3" class="chapter-section active-chapter"><div id="quizContainer3"></div><div class="translation-section"><div class="section-title"><i class="fas fa-language"></i> تدريبات الترجمة - الفصل الثالث</div><div id="translationList3"></div></div></div>
+    <div id="chapter4" class="chapter-section"><div id="quizContainer4"></div><div class="translation-section"><div class="section-title"><i class="fas fa-language"></i> تدريبات الترجمة - الفصل الرابع</div><div id="translationList4"></div></div></div>
+    <div id="chapter5" class="chapter-section"><div id="quizContainer5"></div><div class="translation-section"><div class="section-title"><i class="fas fa-language"></i> تدريبات الترجمة - الفصل الخامس</div><div id="translationList5"></div></div></div>
+    <div id="chapter7" class="chapter-section"><div id="quizContainer7"></div><div class="translation-section"><div class="section-title"><i class="fas fa-language"></i> تدريبات الترجمة - الفصل السابع</div><div id="translationList7"></div></div></div>
+    <div class="footer-design"><i class="fas fa-palette"></i> design by Aya Gaber</div>
 </div>
-
 <script>
-    // 30 سؤال MCQ بالانجليزي (بدون علامات استفهام مزعجة)
-    const mcqData = [
-        { text: "Mental retardation is present in what approximate percentage of the population", options: ["1 to 2 percent", "2 to 3 percent", "4 to 5 percent", "Less than 1 percent"], correct: 1, wrongExplanationAr: "النسبة الصحيحة هي 2 إلى 3 بالمئة من السكان وفقاً للمحتوى العلمي." },
-        { text: "Mental retardation is more frequent in males due to", options: ["Autosomal dominance", "Gene mutations on X chromosome", "Y chromosome excess", "Mitochondrial disorders"], correct: 1, wrongExplanationAr: "السبب يعود إلى العديد من الطفرات الجينية في الكروموسوم X مما يجعل الذكور أكثر عرضة." },
-        { text: "Which area is NOT mentioned as a daily living skill for cognitively impaired children", options: ["Feeding", "Toileting", "Abstract reasoning", "Dressing"], correct: 2, wrongExplanationAr: "المهارات المذكورة: التغذية، استخدام المرحاض، ارتداء الملابس، والعناية الشخصية. التفكير المجرد ليس ضمنها." },
-        { text: "Problems of mentally retarded children extend to", options: ["Only learning", "Social field", "Physical growth only", "Memory only"], correct: 1, wrongExplanationAr: "لا تقتصر على التعلم فحسب بل تمتد إلى المجال الاجتماعي." },
-        { text: "One diagnostic criterion for mental retardation is onset before age", options: ["12 years", "16 years", "18 years", "21 years"], correct: 2, wrongExplanationAr: "ظهور الأعراض يجب أن يكون قبل سن الثامنة عشرة وفقاً للمعايير التشخيصية." },
-        { text: "Mental retardation involves limitations in", options: ["Intellectual and adaptive behavior", "Only motor skills", "Emotional expression only", "Sensory processing"], correct: 0, wrongExplanationAr: "إعاقة تتميز بقيود ملحوظة في الأداء الذهني والسلوك التكيفي." },
-        { text: "Which domain is NOT among the affected areas", options: ["Self care", "School performance", "Abstract symbolic play", "Health and safety"], correct: 2, wrongExplanationAr: "المجالات تشمل التواصل، الرعاية الذاتية، المهارات الاجتماعية، الأداء المدرسي، العمل، الترفيه، الصحة والسلامة." },
-        { text: "A characteristic of mentally retarded child includes IQ between", options: ["70 to 85", "90 to 100", "55 to 70", "110 to 120"], correct: 1, wrongExplanationAr: "النص يذكر أن نسبة ذكائه تتراوح بين 90 و 100 مع ضعف في السلوك التكيفي." },
-        { text: "General backwardness refers to weakness in", options: ["All school subjects", "One subject only", "Physical activities", "Social relations"], correct: 0, wrongExplanationAr: "التأخر الدراسي العام: الطفل ضعيف في جميع مواد المنهج الدراسي." },
-        { text: "Diagnosis of mental retardation depends on", options: ["Only IQ test", "Family history, physical exam and developmental assessment", "EEG only", "Blood group"], correct: 1, wrongExplanationAr: "يعتمد على التاريخ الطبي الشخصي والعائلي، الفحص البدني، والتقييم النمائي." },
-        { text: "Which behavioral factor can contribute to mental retardation", options: ["High income", "Poverty, malnutrition, maternal drugs", "Balanced diet", "Regular exercise"], correct: 1, wrongExplanationAr: "الفقر وسوء التغذية وتعاطي الأم للمخدرات والكحول تساهم في التخلف العقلي." },
-        { text: "Leading cause of mental retardation in industrialized nations is", options: ["Down syndrome", "Fetal alcohol syndrome", "Fragile X syndrome", "Hypothyroidism"], correct: 1, wrongExplanationAr: "متلازمة الكحول الجنينية هي السبب الأكثر شيوعاً بمعدل حالة لكل 100 ولادة." },
-        { text: "Second most common cause is", options: ["Fetal alcohol syndrome", "Down syndrome", "Microcephaly", "Prader Willi syndrome"], correct: 1, wrongExplanationAr: "السبب الثاني هو متلازمة داون بمعدل 1 من كل 800 إلى 1000 ولادة." },
-        { text: "First step in addressing a mentally retarded child includes", options: ["School evaluation", "Anamnesis, physical exam and family history", "Speech therapy", "Psychiatric assessment only"], correct: 1, wrongExplanationAr: "فحص التاريخ المرضي، الفحص البدني، التاريخ العائلي للأمراض العصبية والتخلف العقلي." },
-        { text: "Phase 2 includes screening for", options: ["Autism and blood tests", "Kidney function", "Bone age", "Allergy panel"], correct: 0, wrongExplanationAr: "الفحص المسحي لاضطراب طيف التوحد، تحليل دم شامل، والكشف عن إعاقات سمعية أو بصرية." },
-        { text: "To prevent mental retardation before birth avoid", options: ["Heavy physical work and unnecessary drugs", "Walking", "Drinking water", "Sleeping"], correct: 0, wrongExplanationAr: "تجنب المجهود البدني الشاق والأدوية غير الضرورية." },
-        { text: "Which should be avoided during pregnancy to prevent mental retardation", options: ["Smoking, alcohol and lead", "Vitamins", "Fruits", "Milk"], correct: 0, wrongExplanationAr: "التدخين، الكحول، مضغ التبغ، واتخاذ الاحتياطات ضد التسمم بالرصاص." },
-        { text: "Where should delivery take place to reduce risk", options: ["At home", "In a fully equipped hospital", "In a clinic without facilities", "Anywhere"], correct: 1, wrongExplanationAr: "الولادة في مستشفى مجهزة بكل المرافق وإجراء الإنعاش إذا لم يبكي الطفل." },
-        { text: "After birth to prevent mental retardation one should", options: ["Avoid immunizations", "Immunize against infectious diseases and avoid lead or head injuries", "Let child eat paint", "Slap the child face"], correct: 1, wrongExplanationAr: "التطعيم ضد الأمراض المعدية، منع لمس الطلاء والرصاص، والاحتياط من إصابات الرأس." },
-        { text: "Most causes of mental retardation have no cure but identifying etiology helps", options: ["Guarantee full recovery", "Understand prognosis and recurrence risk", "Avoid any treatment", "Speed up IQ"], correct: 1, wrongExplanationAr: "فهم التشخيص، تقدير احتمالية التكرار، والتنبؤ بالمشكلات الطبية المستقبلية." },
-        { text: "Consanguinity increases risk of mental retardation. Which area mentions it", options: ["Family medical history", "Physical therapy", "Nutrition", "School performance"], correct: 0, wrongExplanationAr: "زواج الأقارب يُذكر ضمن التاريخ العائلي كعامل مهم." },
-        { text: "Phase 4 includes arterial gasometry and", options: ["EEG if epilepsy", "Urine analysis", "CT scan", "Allergy test"], correct: 0, wrongExplanationAr: "المرحلة الرابعة: قياس غازات الدم، بحث مفصّل في التمثيل الغذائي، وتخطيط كهرباء الدماغ في حالة الصرع." },
-        { text: "A baby born with weight less than 2.5 KG needs", options: ["No intervention", "Neonatal care", "Only feeding", "Massage"], correct: 1, wrongExplanationAr: "الطفل الذي يقل وزنه عن 2.5 كجم يحتاج رعاية خاصة لحديثي الولادة." },
-        { text: "Which should be avoided after birth to prevent mental retardation", options: ["Contact with paint and lead", "Drinking clean water", "Vaccinations", "Balanced diet"], correct: 0, wrongExplanationAr: "منع الطفل من لمس الطلاء والرصاص وحبر الصحف." },
-        { text: "What may cause eardrum injury leading to possible harm", options: ["Slapping child on face", "Loud music", "Ear infection", "Crying"], correct: 0, wrongExplanationAr: "لا تصفع الطفل على وجهه فقد يسبب إصابة في طبلة الأذن." },
-        { text: "Clean drinking water and balanced diet help prevent mental retardation", options: ["Before birth only", "After birth", "Only during adolescence", "Only genetic"], correct: 1, wrongExplanationAr: "بعد الولادة يجب توفير غذاء متوازن ومياه شرب نظيفة." },
-        { text: "Tetanus injections for pregnant women prevent", options: ["Infections that may affect fetus", "Genetic disorders", "Obesity", "Diabetes"], correct: 0, wrongExplanationAr: "جميع الحوامل يجب أن يأخذن لقاح التيتانوس للوقاية من الالتهابات." },
-        { text: "If baby does not cry immediately after birth necessary action", options: ["Wait", "Resuscitation measures", "Feed immediately", "Bathe"], correct: 1, wrongExplanationAr: "يجب القيام بإجراءات الإنعاش على الفور." },
-        { text: "Screening for auditive and visual impairments occurs in which phase", options: ["Phase 1", "Phase 2", "Phase 3", "Phase 4"], correct: 1, wrongExplanationAr: "المرحلة الثانية تشمل الكشف عن الإعاقات السمعية والبصرية." },
-        { text: "Detailed metabolic research is performed in Phase", options: ["2", "3", "4", "1"], correct: 2, wrongExplanationAr: "المرحلة الرابعة: بحث مفصّل في التمثيل الغذائي." }
-    ];
-
-    let selections = new Array(mcqData.length).fill(null);
-
-    function renderMCQ() {
-        const container = document.getElementById('quizContainer');
-        if (!container) return;
+    function escapeHtml(s) { if(!s) return ''; return s.replace(/[&<>]/g, m => m==='&'?'&amp;':m==='<'?'&lt;':'&gt;'); }
+    function renderQuiz(containerId, questions) {
+        const container = document.getElementById(containerId);
+        if(!container) return;
         container.innerHTML = '';
-        mcqData.forEach((q, idx) => {
-            const card = document.createElement('div');
-            card.className = 'quiz-card';
-            const qNumber = idx + 1;
-            const qDiv = document.createElement('div');
-            qDiv.className = 'question-text';
-            qDiv.innerHTML = `<span class="q-num">Q${qNumber}</span> ${escapeHtml(q.text)}`;
+        let selections = new Array(questions.length).fill(null);
+        questions.forEach((q, idx) => {
+            const card = document.createElement('div'); card.className = 'quiz-card';
+            const qDiv = document.createElement('div'); qDiv.className = 'question-text';
+            qDiv.innerHTML = `<span class="q-num">Q${idx+1}</span> ${escapeHtml(q.text)}`;
             card.appendChild(qDiv);
-            const optsDiv = document.createElement('div');
-            optsDiv.className = 'options';
+            const optsDiv = document.createElement('div'); optsDiv.className = 'options';
             q.options.forEach((opt, optIdx) => {
-                const optWrap = document.createElement('div');
-                optWrap.className = 'option';
-                const radioId = `mcq_${idx}_opt${optIdx}`;
-                const radio = document.createElement('input');
-                radio.type = 'radio';
-                radio.name = `mcq_${idx}`;
-                radio.value = optIdx;
-                radio.id = radioId;
+                const optWrap = document.createElement('div'); optWrap.className = 'option';
+                const radioId = `q_${containerId}_${idx}_${optIdx}`;
+                const radio = document.createElement('input'); radio.type = 'radio'; radio.name = `q_${containerId}_${idx}`; radio.value = optIdx; radio.id = radioId;
                 radio.addEventListener('change', () => { selections[idx] = optIdx; });
-                const label = document.createElement('label');
-                label.htmlFor = radioId;
-                label.innerText = opt;
-                optWrap.appendChild(radio);
-                optWrap.appendChild(label);
-                optsDiv.appendChild(optWrap);
+                const label = document.createElement('label'); label.htmlFor = radioId; label.innerText = opt;
+                optWrap.appendChild(radio); optWrap.appendChild(label); optsDiv.appendChild(optWrap);
             });
             card.appendChild(optsDiv);
-            const submitBtn = document.createElement('button');
-            submitBtn.innerText = 'Check';
-            submitBtn.className = 'btn-submit';
-            submitBtn.addEventListener('click', () => {
+            const btn = document.createElement('button'); btn.innerText = 'Check'; btn.className = 'btn-submit';
+            btn.addEventListener('click', () => {
                 const selected = selections[idx];
-                if (selected === undefined || selected === null) {
-                    const temp = document.createElement('div');
-                    temp.className = 'feedback wrong';
+                if(selected === undefined || selected === null) {
+                    const temp = document.createElement('div'); temp.className = 'feedback wrong';
                     temp.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please select an answer first';
-                    const old = card.querySelector('.feedback');
-                    if (old) old.remove();
-                    card.appendChild(temp);
-                    setTimeout(() => { if(temp.parentNode) temp.remove(); }, 1600);
+                    const old = card.querySelector('.feedback'); if(old) old.remove(); card.appendChild(temp);
+                    setTimeout(() => { if(temp.parentNode) temp.remove(); }, 1500);
                     return;
                 }
                 const isCorrect = (selected === q.correct);
-                const feedbackDiv = document.createElement('div');
-                feedbackDiv.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
-                if (isCorrect) {
-                    feedbackDiv.innerHTML = `<i class="fas fa-check-circle"></i> ✅ Correct<br><div style="margin-top:5px;">📘 ${escapeHtml(q.wrongExplanationAr)}</div>`;
-                } else {
-                    const correctAnswerText = q.options[q.correct];
-                    feedbackDiv.innerHTML = `<i class="fas fa-times-circle"></i> ❌ Incorrect. Correct answer: <strong>${escapeHtml(correctAnswerText)}</strong><br><div style="margin-top:5px;">📌 ${escapeHtml(q.wrongExplanationAr)}</div>`;
-                }
-                const oldFeedback = card.querySelector('.feedback');
-                if (oldFeedback) oldFeedback.remove();
-                card.appendChild(feedbackDiv);
+                const fb = document.createElement('div'); fb.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
+                if(isCorrect) fb.innerHTML = `<i class="fas fa-check-circle"></i> ✅ Correct<br><div>📘 ${escapeHtml(q.wrongExplanationAr)}</div>`;
+                else fb.innerHTML = `<i class="fas fa-times-circle"></i> ❌ Incorrect. Correct: <strong>${escapeHtml(q.options[q.correct])}</strong><br><div>📌 ${escapeHtml(q.wrongExplanationAr)}</div>`;
+                const oldFb = card.querySelector('.feedback'); if(oldFb) oldFb.remove(); card.appendChild(fb);
             });
-            card.appendChild(submitBtn);
+            card.appendChild(btn);
             container.appendChild(card);
         });
     }
-
-    // الترجمة: الأسهم الشفافة والسؤال تحت النص وليس جنبه
-    const translationExercises = [
+    function renderTranslations(containerId, exercises) {
+        const container = document.getElementById(containerId);
+        if(!container) return;
+        container.innerHTML = '';
+        exercises.forEach((ex, idx) => {
+            const item = document.createElement('div'); item.className = 'trans-item';
+            const prompt = document.createElement('div'); prompt.className = 'trans-prompt';
+            prompt.innerHTML = ex.type === 'ar2en' ? `<i class="fas fa-long-arrow-alt-right"></i> ${escapeHtml(ex.text)}` : `<i class="fas fa-long-arrow-alt-left"></i> <span style="direction:ltr">${escapeHtml(ex.text)}</span>`;
+            const textarea = document.createElement('textarea'); textarea.rows = 2; textarea.className = 'trans-input'; textarea.placeholder = 'اكتب ترجمتك...';
+            const feedback = document.createElement('div'); feedback.className = 'trans-feedback';
+            const btn = document.createElement('button'); btn.innerText = 'Check'; btn.className = 'trans-btn';
+            btn.addEventListener('click', () => {
+                const user = textarea.value.trim();
+                let correctAnswer = ex.type === 'ar2en' ? ex.correctEn : ex.correctAr;
+                let normUser = user.replace(/[.,!?;:]/g, '').replace(/\s+/g, ' ').toLowerCase();
+                let normCorrect = correctAnswer.replace(/[.,!?;:]/g, '').replace(/\s+/g, ' ').toLowerCase();
+                let isMatch = normUser === normCorrect || (normCorrect.includes(normUser) && normUser.length > 12) || (normUser.includes(normCorrect.substring(0,35)));
+                feedback.innerHTML = isMatch ? '<span style="color:#4c8b4a;">✅ ترجمة صحيحة</span>' : `<span style="color:#c2594b;">❌ الإجابة النموذجية: ${escapeHtml(correctAnswer)}</span>`;
+            });
+            item.appendChild(prompt); item.appendChild(textarea); item.appendChild(btn); item.appendChild(feedback);
+            container.appendChild(item);
+        });
+    }
+    // --------------------- الفصل الثالث (30 سؤال) -------------------------
+    const ch3Questions = [
+        { text: "Mental retardation is present in what approximate percentage of the population", options: ["1-2%", "2-3%", "4-5%", "<1%"], correct: 1, wrongExplanationAr: "النسبة الصحيحة 2-3% من السكان." },
+        { text: "Mental retardation is more frequent in males due to", options: ["Autosomal dominance", "Gene mutations on X chromosome", "Y chromosome excess", "Mitochondrial"], correct: 1, wrongExplanationAr: "طفرات الكروموسوم X." },
+        { text: "Which is NOT a daily living skill for cognitively impaired children", options: ["Feeding", "Toileting", "Abstract reasoning", "Dressing"], correct: 2, wrongExplanationAr: "التفكير المجرد ليس من المهارات المذكورة." },
+        { text: "Problems of mentally retarded children extend to", options: ["Only learning", "Social field", "Physical growth", "Memory"], correct: 1, wrongExplanationAr: "تمتد إلى المجال الاجتماعي." },
+        { text: "Diagnostic criterion: onset before age", options: ["12", "16", "18", "21"], correct: 2, wrongExplanationAr: "قبل سن 18 عاماً." },
+        { text: "Mental retardation involves limitations in", options: ["Intellectual & adaptive", "Motor only", "Emotional only", "Sensory"], correct: 0, wrongExplanationAr: "الأداء الذهني والسلوك التكيفي." },
+        { text: "Which domain is NOT affected", options: ["Self care", "School performance", "Abstract symbolic play", "Health"], correct: 2, wrongExplanationAr: "اللعب الرمزي لم يذكر." },
+        { text: "IQ range characteristic mentioned", options: ["70-85", "90-100", "55-70", "110-120"], correct: 1, wrongExplanationAr: "الذكاء بين 90-100." },
+        { text: "General backwardness refers to weakness in", options: ["All subjects", "One subject", "Physical", "Social"], correct: 0, wrongExplanationAr: "جميع المواد الدراسية." },
+        { text: "Diagnosis depends on", options: ["IQ only", "Family history, physical exam, developmental assessment", "EEG", "Blood"], correct: 1, wrongExplanationAr: "التاريخ المرضي والفحص البدني والتقييم النمائي." },
+        { text: "Behavioral factor contributing to MR", options: ["High income", "Poverty, malnutrition, maternal drugs", "Balanced diet", "Exercise"], correct: 1, wrongExplanationAr: "الفقر وسوء التغذية والمخدرات." },
+        { text: "Leading cause in industrialized nations", options: ["Down", "Fetal alcohol", "Fragile X", "Hypothyroidism"], correct: 1, wrongExplanationAr: "متلازمة الكحول الجنينية." },
+        { text: "Second most common cause", options: ["Fetal alcohol", "Down syndrome", "Microcephaly", "Prader Willi"], correct: 1, wrongExplanationAr: "متلازمة داون." },
+        { text: "First step in addressing includes", options: ["School evaluation", "Anamnesis, physical exam, family history", "Speech", "Psychiatric"], correct: 1, wrongExplanationAr: "التاريخ المرضي والفحص البدني." },
+        { text: "Phase 2 includes screening for", options: ["Autism & blood tests", "Kidney", "Bone", "Allergy"], correct: 0, wrongExplanationAr: "التوحد وتحاليل الدم." },
+        { text: "Prevent before birth: avoid", options: ["Heavy work & unnecessary drugs", "Walking", "Water", "Sleep"], correct: 0, wrongExplanationAr: "المجهود الشاق والأدوية غير الضرورية." },
+        { text: "Avoid during pregnancy", options: ["Smoking, alcohol, lead", "Vitamins", "Fruits", "Milk"], correct: 0, wrongExplanationAr: "التدخين والكحول والرصاص." },
+        { text: "Delivery should be in", options: ["Home", "Fully equipped hospital", "Clinic", "Anywhere"], correct: 1, wrongExplanationAr: "مستشفى مجهز." },
+        { text: "After birth: immunize and avoid", options: ["Lead/head injuries", "Water", "Food", "Sleep"], correct: 0, wrongExplanationAr: "الرصاص وإصابات الرأس." },
+        { text: "Etiology helps to", options: ["Guarantee recovery", "Understand prognosis & recurrence", "Avoid treatment", "Speed IQ"], correct: 1, wrongExplanationAr: "فهم التشخيص واحتمالية التكرار." },
+        { text: "Consanguinity mentioned in", options: ["Family history", "Nutrition", "School", "Therapy"], correct: 0, wrongExplanationAr: "التاريخ العائلي." },
+        { text: "Phase 4 includes EEG if", options: ["Epilepsy", "Fever", "Headache", "Infection"], correct: 0, wrongExplanationAr: "حالة صرع." },
+        { text: "Birth weight <2.5KG needs", options: ["No care", "Neonatal care", "Feeding only", "Massage"], correct: 1, wrongExplanationAr: "رعاية خاصة لحديثي الولادة." },
+        { text: "Avoid after birth", options: ["Paint & lead", "Clean water", "Vaccines", "Diet"], correct: 0, wrongExplanationAr: "الطلاء والرصاص." },
+        { text: "Eardrum injury may be caused by", options: ["Slapping face", "Loud music", "Infection", "Crying"], correct: 0, wrongExplanationAr: "صفع الطفل على الوجه." },
+        { text: "Clean water and diet help prevent", options: ["Before birth", "After birth", "Adolescence", "Genetic"], correct: 1, wrongExplanationAr: "بعد الولادة." },
+        { text: "Tetanus for pregnant women prevents", options: ["Infections affecting fetus", "Genetic", "Obesity", "Diabetes"], correct: 0, wrongExplanationAr: "الالتهابات التي تؤثر على الجنين." },
+        { text: "If baby doesn't cry immediately", options: ["Wait", "Resuscitation", "Feed", "Bathe"], correct: 1, wrongExplanationAr: "إجراءات الإنعاش." },
+        { text: "Auditory/visual screening in phase", options: ["1", "2", "3", "4"], correct: 1, wrongExplanationAr: "المرحلة الثانية." },
+        { text: "Metabolic research in phase", options: ["2", "3", "4", "1"], correct: 2, wrongExplanationAr: "المرحلة الرابعة." }
+    ];
+    const transCh3 = [
         { type: "ar2en", text: "التخلف العقلي هو اضطراب وراثي يظهر في صورة انخفاض ملحوظ عن المتوسط في القدرة العقلية العامة", correctEn: "Mental retardation is a genetic disorder manifested in significantly below average overall intellectual functioning" },
         { type: "ar2en", text: "غالباً ما يظهر على هؤلاء الأطفال تأخر في الكلام أو اضطرابات سلوكية", correctEn: "These children often present with speech delay or behavioral disorders" },
         { type: "ar2en", text: "يتم تشخيص التخلف العقلي بناءً على ثلاثة معايير: ظهور الأعراض قبل سن الثامنة عشرة", correctEn: "The diagnosis of mental retardation is established according to three criteria: onset of symptoms before the age of 18 years" },
@@ -532,73 +238,162 @@
         { type: "en2ar", text: "Intellectual function significantly lower than average with an IQ equal to or less than 70", correctAr: "انخفاض الأداء الذهني بشكل ملحوظ عن المتوسط بحيث يكون معامل الذكاء مساوياً لـ 70 أو أقل" },
         { type: "en2ar", text: "Precautions should be taken against head injury and accidents after birth", correctAr: "يجب اتخاذ الاحتياطات اللازمة للوقاية من إصابات الرأس والحوادث بعد الولادة" }
     ];
-
-    function renderTranslations() {
-        const container = document.getElementById('translationList');
-        if (!container) return;
-        container.innerHTML = '';
-        translationExercises.forEach((ex, idx) => {
-            const itemDiv = document.createElement('div');
-            itemDiv.className = 'trans-item';
-            const prompt = document.createElement('div');
-            prompt.className = 'trans-prompt';
-            if (ex.type === 'ar2en') {
-                prompt.innerHTML = `<i class="fas fa-long-arrow-alt-right"></i> <span>${escapeHtml(ex.text)}</span>`;
-            } else {
-                prompt.innerHTML = `<i class="fas fa-long-arrow-alt-left"></i> <span style="direction: ltr; display: inline-block;">${escapeHtml(ex.text)}</span>`;
-            }
-            const textarea = document.createElement('textarea');
-            textarea.rows = 2;
-            textarea.className = 'trans-input';
-            textarea.placeholder = 'اكتب ترجمتك هنا...';
-            const feedbackSpan = document.createElement('div');
-            feedbackSpan.className = 'trans-feedback';
-            const checkBtn = document.createElement('button');
-            checkBtn.innerText = 'Check';
-            checkBtn.className = 'trans-btn';
-            checkBtn.addEventListener('click', () => {
-                const userAnswer = textarea.value.trim();
-                let isCorrect = false;
-                let correctAnswerText = '';
-                if (ex.type === 'ar2en') {
-                    correctAnswerText = ex.correctEn;
-                    const normUser = userAnswer.replace(/[.,!?;:]/g, '').replace(/\s+/g, ' ').toLowerCase();
-                    const normCorrect = correctAnswerText.replace(/[.,!?;:]/g, '').replace(/\s+/g, ' ').toLowerCase();
-                    isCorrect = normUser === normCorrect || (normCorrect.includes(normUser) && normUser.length > 15) || (normUser.includes(normCorrect.substring(0, 40)));
-                } else {
-                    correctAnswerText = ex.correctAr;
-                    const cleanUser = userAnswer.replace(/[.,!?;:،؟]/g, '').replace(/\s+/g, ' ').trim();
-                    const cleanCorrect = correctAnswerText.replace(/[.,!?;:،؟]/g, '').replace(/\s+/g, ' ').trim();
-                    isCorrect = cleanUser === cleanCorrect || (cleanCorrect.includes(cleanUser) && cleanUser.length > 12);
-                }
-                feedbackSpan.innerHTML = isCorrect ? '<span style="color:#4c8b4a;">✅ Correct! Excellent translation.</span>' : `<span style="color:#c2594b;">❌ Not accurate. Model answer: “${escapeHtml(correctAnswerText)}”</span>`;
-            });
-            itemDiv.appendChild(prompt);
-            itemDiv.appendChild(textarea);
-            itemDiv.appendChild(checkBtn);
-            itemDiv.appendChild(feedbackSpan);
-            container.appendChild(itemDiv);
+    // --------------------- الفصل الرابع (30 سؤال) -------------------------
+    const ch4Questions = [
+        { text: "Students with learning disability represent which category in schools", options: ["Smallest", "Largest", "Second largest", "Rare"], correct: 1, wrongExplanationAr: "أكبر فئة إعاقة في المدارس." },
+        { text: "Long-term outcome for young adults with LD", options: ["Higher wages", "Lower annual incomes", "More work hours", "Higher employment"], correct: 1, wrongExplanationAr: "أجور أقل ودخل سنوي منخفض." },
+        { text: "LD most frequently identified in", options: ["Canada", "United States", "UK", "Australia"], correct: 1, wrongExplanationAr: "الولايات المتحدة." },
+        { text: "LD includes difficulties in", options: ["Only reading", "Listening, speaking, reading, math, writing", "Only math", "Only writing"], correct: 1, wrongExplanationAr: "الاستماع، التحدث، القراءة، الرياضيات، التعبير الكتابي." },
+        { text: "Which is NOT a specific type of LD", options: ["Dyslexia", "Dyscalculia", "Dyspraxia", "Dysgraphia"], correct: 2, wrongExplanationAr: "عسر القراءة، عسر الحساب، عسر الكتابة." },
+        { text: "Environmental risk factors include", options: ["High SES", "Prenatal nicotine/alcohol, premature birth", "Good nutrition", "Exercise"], correct: 1, wrongExplanationAr: "التعرض للنيكوتين/الكحول قبل الولادة، الولادة المبكرة." },
+        { text: "Possible causes of LD", options: ["Only genetics", "Physiological & environmental", "Only teaching", "Only nutrition"], correct: 1, wrongExplanationAr: "عوامل فسيولوجية وبيئية." },
+        { text: "LD identified through limited ability to", options: ["Only read", "Listen, see, focus, perceive, process", "Only write", "Only speak"], correct: 1, wrongExplanationAr: "الاستماع، الرؤية، التركيز، الإدراك، معالجة المعلومات." },
+        { text: "Distractibility means", options: ["Refuses tasks", "Loses focus, engages in interesting tasks", "Outbursts", "Needs extra time"], correct: 1, wrongExplanationAr: "فقدان التركيز والانخراط في مهام مثيرة." },
+        { text: "Defiance means child refuses because", options: ["He is angry", "He doesn't know how", "He is tired", "He is hungry"], correct: 1, wrongExplanationAr: "لا يعرف كيفية القيام بالمهمة." },
+        { text: "Behavioural outbursts include", options: ["Frustration, yelling, leaving class", "Refusing tasks", "Loss of focus", "Slow writing"], correct: 0, wrongExplanationAr: "الإحباط والصراخ ومغادرة الصف." },
+        { text: "Needing extra time because", options: ["Refuses", "Doesn't finish tests on time, longer homework", "Poor handwriting", "Cannot read"], correct: 1, wrongExplanationAr: "لا ينهي الاختبارات في الوقت المحدد." },
+        { text: "Dyslexia risk factors include", options: ["Poor diet", "Genetic predisposition or family member", "Lack of schooling", "Vision problems"], correct: 1, wrongExplanationAr: "استعداد وراثي أو وجود فرد بالعائلة." },
+        { text: "Imaging in dyslexia shows", options: ["Left-hemisphere reliance", "Right-hemisphere reliance during phonological tasks", "No difference", "Occipital activation"], correct: 1, wrongExplanationAr: "الاعتماد على النصف الأيمن أثناء المهام الصوتية." },
+        { text: "Dyscalculia is severe difficulty in", options: ["Reading", "Math", "Writing", "Speaking"], correct: 1, wrongExplanationAr: "الرياضيات." },
+        { text: "Approx percentage of children with dyscalculia", options: ["2%", "6%", "10%", "15%"], correct: 1, wrongExplanationAr: "نحو 6%." },
+        { text: "Dysgraphia means difficulty with", options: ["Reading", "Handwriting", "Math", "Memory"], correct: 1, wrongExplanationAr: "الكتابة اليدوية." },
+        { text: "In dysgraphia, writing requires inordinate", options: ["Energy, stamina, time", "Money", "Support", "Technology"], correct: 0, wrongExplanationAr: "طاقة وتحمل ووقت." },
+        { text: "Expressive writing requires synchronization of", options: ["Only memory", "Organization, memory, attention, motor, language", "Only attention", "Only motor"], correct: 1, wrongExplanationAr: "التنظيم، الذاكرة، الانتباه، المهارات الحركية، اللغة." },
+        { text: "In dyslexic dysgraphia, finger-tapping speed is", options: ["Abnormal", "Normal", "Very slow", "Fast"], correct: 1, wrongExplanationAr: "طبيعية." },
+        { text: "In motor dysgraphia, finger-tapping speed is", options: ["Normal", "Abnormal", "Excellent", "Fast"], correct: 1, wrongExplanationAr: "غير طبيعية." },
+        { text: "Early learning years important for teaching", options: ["Discipline", "How to love learning", "Memorization", "Sports"], correct: 1, wrongExplanationAr: "حب التعلم." },
+        { text: "Students with LD risk", options: ["Higher motivation", "Social-emotional, behavioral problems, diminished motivation", "Physical illness", "Only academic success"], correct: 1, wrongExplanationAr: "مشكلات اجتماعية وانفعالية وسلوكية وانخفاض الدافعية." },
+        { text: "In 2001, US children classified with LD", options: ["1.2M", "2.9M", "5M", "500K"], correct: 1, wrongExplanationAr: "2.9 مليون." },
+        { text: "LD are invisible because", options: ["Easily noticed", "Often unnoticeable and misunderstood", "Physical", "Genetic"], correct: 1, wrongExplanationAr: "غير مرئية ويساء فهمها." },
+        { text: "Dyscalculia also known as", options: ["Word blindness", "Number blindness or acalculia", "Letter blindness", "Color blindness"], correct: 1, wrongExplanationAr: "عمى الأعداد أو الأكاكوليا." },
+        { text: "Dysgraphic student may forget", options: ["What he meant to express", "His name", "The date", "Teacher's name"], correct: 0, wrongExplanationAr: "ينسى ما كان يقصد التعبير عنه." },
+        { text: "Which dysgraphia shows poor oral spelling", options: ["Motor", "Dyslexic dysgraphia", "Spatial", "Phonological"], correct: 1, wrongExplanationAr: "عسر الكتابة المرتبط بعسر القراءة." },
+        { text: "In motor dysgraphia, drawing is usually", options: ["Excellent", "Problematic", "Normal", "Fast"], correct: 1, wrongExplanationAr: "صعب (مشكلة)." },
+        { text: "LD is composed of disabilities in", options: ["Only reading", "Listening, speaking, reading, comprehension, math, written expression", "Only math", "Only writing"], correct: 1, wrongExplanationAr: "الاستماع، التحدث، القراءة، الفهم، الحساب، التعبير الكتابي." }
+    ];
+    const transCh4 = [
+        { type: "ar2en", text: "يمثل الطلاب ذوو صعوبات التعلم أكبر فئة من فئات الإعاقة في المدارس", correctEn: "Students with learning disability represent the largest category of disability in schools" },
+        { type: "ar2en", text: "صعوبات التعلم غير مرئية وغالباً ما تكون غير ملحوظة أو يُساء فهمها", correctEn: "Learning disabilities are invisible and often unnoticeable or misunderstood" },
+        { type: "ar2en", text: "عسر الحساب يشمل صعوبات شديدة في الرياضيات وعدم فهم معنى الأعداد", correctEn: "Dyscalculia includes severe difficulties in math and not understanding the meaning of numbers" },
+        { type: "ar2en", text: "عسر الكتابة هو اضطراب يتمثل في صعوبة تتعلق بالكتابة اليدوية", correctEn: "Dysgraphia is a disorder involving difficulty with handwriting" },
+        { type: "ar2en", text: "الكتابة التعبيرية تتطلب تنسيق العديد من الوظائف العقلية", correctEn: "Expressive writing requires synchronizing many mental functions" },
+        { type: "en2ar", text: "Learning disability is composed of disabilities in listening, speaking, basic reading, reading comprehension, math calculation, math reasoning, and written expression", correctAr: "صعوبات التعلم تشمل صعوبات في الاستماع والتحدث والقراءة الأساسية والفهم والحساب والاستدلال الرياضي والتعبير الكتابي" },
+        { type: "en2ar", text: "Behavioural signs of learning disabilities include distractibility, defiance, outbursts, and needing extra time", correctAr: "العلامات السلوكية لصعوبات التعلم تشمل التشتت والتحدي والنوبات الانفعالية والحاجة إلى وقت إضافي" },
+        { type: "en2ar", text: "Dyslexia risk factors include genetic predisposition or a family member with dyslexia", correctAr: "عوامل خطر عسر القراءة تشمل الاستعداد الوراثي أو وجود فرد في العائلة مصاب بعسر القراءة" },
+        { type: "en2ar", text: "Dysgraphia requires inordinate amounts of energy, stamina, and time", correctAr: "عسر الكتابة يتطلب كميات كبيرة من الطاقة والتحمل والوقت" },
+        { type: "en2ar", text: "Approximately 6% of school children suffer from dyscalculia", correctAr: "ما يقرب من 6% من الأطفال الملتحقين بالمدارس يعانون من عسر الحساب" }
+    ];
+    // --------------------- الفصل الخامس (30 سؤال) -------------------------
+    const ch5Questions = [
+        { text: "Vision is a vital mean of", options: ["Acquiring information", "Playing only", "Sleeping", "Eating"], correct: 0, wrongExplanationAr: "وسيلة حيوية لاكتساب المعلومات." },
+        { text: "Lack of vision can severely limit a child's ability leading to", options: ["Independence", "Dependency", "Strength", "Happiness"], correct: 1, wrongExplanationAr: "الاعتماد على الآخرين." },
+        { text: "A disability is a physical or mental problem that makes it complicated to", options: ["Walk, see, hear, speak, learn", "Only play", "Only eat", "Only sleep"], correct: 0, wrongExplanationAr: "المشي، الرؤية، السمع، الكلام، التعلم." },
+        { text: "Visual impairment cannot be corrected by", options: ["Conventional measures like glasses", "Surgery only", "Therapy only", "Nutrition"], correct: 0, wrongExplanationAr: "الوسائل التقليدية مثل النظارات." },
+        { text: "Visual impairment in childhood has lifelong implications for", options: ["Development, education, family care", "Only vision", "Only school", "Only play"], correct: 0, wrongExplanationAr: "النمو، التعليم، رعاية الأسرة." },
+        { text: "Visual impairment results in functional limitations of", options: ["Reading or writing", "Walking only", "Eating only", "Sleeping"], correct: 0, wrongExplanationAr: "القراءة والكتابة." },
+        { text: "According to ICD-10, visual impairment has how many levels", options: ["2", "3", "4", "5"], correct: 2, wrongExplanationAr: "أربعة مستويات." },
+        { text: "Children with VI suffer losses including", options: ["Self-worth, mobility, independence", "Only vision", "Only hearing", "Only speech"], correct: 0, wrongExplanationAr: "تقدير الذات، الحركة، الاستقلالية." },
+        { text: "Blindness is defined clinically as", options: ["Absence of sense of light", "Low vision", "Partial sight", "Color blindness"], correct: 0, wrongExplanationAr: "فقدان حاسة الضوء." },
+        { text: "WHO estimates blind children worldwide", options: ["1-5 million", "10 million", "500,000", "20 million"], correct: 0, wrongExplanationAr: "1 إلى 5 ملايين." },
+        { text: "In Egypt, blindness affects", options: ["0.5%", "1.1%", "2%", "3%"], correct: 1, wrongExplanationAr: "1.1% من السكان." },
+        { text: "Children with VI spend more time in", options: ["Group play", "Solitary play", "Team sports", "Outdoor games"], correct: 1, wrongExplanationAr: "اللعب المنفرد." },
+        { text: "Students with low vision may see when content is", options: ["Enlarged", "Reduced", "Blurred", "Dark"], correct: 0, wrongExplanationAr: "عند تكبير المحتوى." },
+        { text: "VI in childhood has lifelong implication for child and", options: ["Family", "Only school", "Only friends", "Only teachers"], correct: 0, wrongExplanationAr: "الأسرة." },
+        { text: "Students who are blind may use", options: ["Braille or large print", "Only audio", "Only speech", "Only signs"], correct: 0, wrongExplanationAr: "طريقة برايل أو الخط الكبير." },
+        { text: "Behavior problems in blind children are mostly product of", options: ["External factors like family environment", "Internal factors", "Genetics only", "Nutrition"], correct: 0, wrongExplanationAr: "عوامل خارجية مثل البيئة الأسرية." },
+        { text: "Majority of children with profound VI have delay in", options: ["Verbal abilities", "Motor skills", "Eating", "Walking"], correct: 0, wrongExplanationAr: "القدرات اللفظية." },
+        { text: "VI has severe consequences in", options: ["Developing countries", "Rich countries", "All countries", "Cities only"], correct: 0, wrongExplanationAr: "الدول النامية." },
+        { text: "Approximately what percent of learning occurs through vision", options: ["50%", "80%", "30%", "90%"], correct: 1, wrongExplanationAr: "80% من التعلم عبر البصر." },
+        { text: "Loss of vision leads to major changes in", options: ["Lifestyle and habits", "Only diet", "Only sleep", "Only play"], correct: 0, wrongExplanationAr: "نمط الحياة والعادات." },
+        { text: "Blind child may have difficulty with attachment due to failure of", options: ["Eye contact and facial expressions", "Speech", "Hearing", "Touch"], correct: 0, wrongExplanationAr: "التواصل البصري وتعبيرات الوجه." },
+        { text: "Challenging for blind child to develop normally on levels of", options: ["Social, emotional, cognitive", "Only physical", "Only motor", "Only artistic"], correct: 0, wrongExplanationAr: "النمو الاجتماعي والعاطفي والمعرفي." },
+        { text: "Children with vision loss may show superior", options: ["Memory performance", "Physical strength", "Hearing only", "Taste"], correct: 0, wrongExplanationAr: "أداء الذاكرة." },
+        { text: "Difficulties in obtaining accurate data on causes of VI due to", options: ["Regional differences", "Lack of interest", "Too many cases", "No doctors"], correct: 0, wrongExplanationAr: "اختلاف الأسباب بين المناطق." },
+        { text: "In developing countries, acquired eye diseases become less common with", options: ["Economic and health development", "More pollution", "Less education", "More population"], correct: 0, wrongExplanationAr: "تطور الخدمات الاقتصادية والصحية." },
+        { text: "Individuals with VI experience more symptoms of", options: ["Depression", "Happiness", "Energy", "Strength"], correct: 0, wrongExplanationAr: "أعراض الاكتئاب." },
+        { text: "Children with VI may compensate and achieve similar", options: ["Educational attainment as sighted peers", "Lower grades", "No education", "Only arts"], correct: 0, wrongExplanationAr: "تحصيل دراسي مماثل للأقران المبصرين." },
+        { text: "Macular degeneration prevalence is greatest in", options: ["High-income regions", "Low-income regions", "All regions", "Rural areas"], correct: 0, wrongExplanationAr: "المناطق ذات الدخل المرتفع." },
+        { text: "Social competence requires understanding", options: ["Feelings, preferences, perspectives of others", "Only math", "Only reading", "Only writing"], correct: 0, wrongExplanationAr: "مشاعر الآخرين وتفضيلاتهم ووجهات نظرهم." }
+    ];
+    const transCh5 = [
+        { type: "ar2en", text: "الإعاقة البصرية هي ضعف في الأداء البصري لا يمكن تصحيحه بالوسائل التقليدية", correctEn: "Visual impairment is a condition of reduced visual performance that cannot be corrected by conventional measures" },
+        { type: "ar2en", text: "الأطفال ذوو الإعاقة البصرية يعانون من خسائر عديدة منها تقدير الذات والحركة", correctEn: "Children with visual impairment suffer several losses including self-worth and mobility" },
+        { type: "ar2en", text: "يحدث ما يقارب 80% من التعلم من خلال حاسة البصر", correctEn: "Approximately 80% of learning occurs through vision" },
+        { type: "ar2en", text: "فقدان البصر يؤدي إلى تغييرات كبيرة في نمط الحياة والعادات", correctEn: "Loss of vision leads to major changes in lifestyle and habits" },
+        { type: "ar2en", text: "الأفراد الذين يعانون من ضعف البصر يواجهون أعراضاً أكثر للاكتئاب", correctEn: "Individuals with visual impairment experience more symptoms of depression" },
+        { type: "en2ar", text: "Blindness is defined clinically as the absence of sense of light", correctAr: "يعرف العمى طبيًا بأنه فقدان حاسة الضوء" },
+        { type: "en2ar", text: "Children with visual impairment spend more time in solitary play than sighted peers", correctAr: "الأطفال ذوو الإعاقة البصرية يقضون وقتًا أطول في اللعب المنفرد مقارنة بأقرانهم المبصرين" },
+        { type: "en2ar", text: "Visual impairment in childhood has lifelong implications for development, education, and family care", correctAr: "الإعاقة البصرية في الطفولة لها آثار مدى الحياة على النمو والتعليم ورعاية الأسرة" },
+        { type: "en2ar", text: "Students who are blind may use Braille or large print for reading and writing", correctAr: "الطلاب المكفوفون قد يستخدمون طريقة برايل أو الخط الكبير للقراءة والكتابة" },
+        { type: "en2ar", text: "Approximately 95 million students aged 0-14 years have some form of disability according to WHO", correctAr: "وفقًا لمنظمة الصحة العالمية، ما يقدر بنحو 95 مليون طالب تتراوح أعمارهم بين 0-14 سنة يعانون من شكل من أشكال الإعاقة" }
+    ];
+    // --------------------- الفصل السابع (30 سؤال) -------------------------
+    const ch7Questions = [
+        { text: "Communication disorders can significantly impact an individual's ability to", options: ["Express themselves and comprehend others", "Only walk", "Only eat", "Only sleep"], correct: 0, wrongExplanationAr: "التعبير عن النفس وفهم الآخرين." },
+        { text: "Children with established developmental disabilities are susceptible to", options: ["Multiple problems like motor, language, sensory", "Only one problem", "No problems", "Only physical"], correct: 0, wrongExplanationAr: "مشكلات متعددة مثل ضعف الحركة ومشكلات اللغة والحسية." },
+        { text: "A communication disorder ranges from difficulty producing a single sound to", options: ["Inability to express needs verbally or nonverbally", "Only stuttering", "Only voice problems", "Only hearing loss"], correct: 0, wrongExplanationAr: "عدم القدرة على التعبير عن الاحتياجات لفظياً أو غير لفظي." },
+        { text: "ASHA defined communication disorder as impairment in ability to receive, send, process, and comprehend", options: ["Verbal, nonverbal and graphic systems", "Only verbal", "Only written", "Only signs"], correct: 0, wrongExplanationAr: "الأنظمة اللفظية وغير اللفظية والخطية." },
+        { text: "Language problems can involve difficulty with", options: ["Grammar, vocabulary, word meaning, social use", "Only reading", "Only writing", "Only listening"], correct: 0, wrongExplanationAr: "القواعد، المفردات، معنى الكلمات، الاستخدام الاجتماعي." },
+        { text: "Genetic factors may cause disorders such as", options: ["Specific Language Impairment", "Broken bones", "Heart disease", "Diabetes"], correct: 0, wrongExplanationAr: "اضطراب اللغة المحدد." },
+        { text: "Neurological conditions affecting communication include", options: ["Brain injuries, strokes, autism", "Only cold", "Only fever", "Only allergies"], correct: 0, wrongExplanationAr: "إصابات الدماغ، السكتات الدماغية، التوحد." },
+        { text: "Lack of exposure to language-rich environments can", options: ["Prevent language acquisition", "Improve language", "Have no effect", "Only affect hearing"], correct: 0, wrongExplanationAr: "إعاقة اكتساب اللغة." },
+        { text: "Estimated prevalence of speech language delay in US children aged 2-5 years is", options: ["5-12%", "1-2%", "15-20%", "25-30%"], correct: 0, wrongExplanationAr: "بين 5% و12%." },
+        { text: "Speech and language disorders are more common in", options: ["Boys than girls", "Girls than boys", "Equal", "Only adults"], correct: 0, wrongExplanationAr: "أكثر شيوعًا لدى الأولاد." },
+        { text: "Children with articulation disorders have anxiety levels that correspond with", options: ["Severity of their disorder", "Age only", "Gender only", "School grade"], correct: 0, wrongExplanationAr: "شدة اضطراب النطق." },
+        { text: "Articulation disorder is a motor speech disorder involving difficulty", options: ["Pronouncing sounds", "Understanding language", "Reading", "Writing"], correct: 0, wrongExplanationAr: "نطق الأصوات." },
+        { text: "Dysarthria is a motor speech disorder due to impairment of", options: ["Muscle movements for speech", "Hearing", "Vision", "Memory"], correct: 0, wrongExplanationAr: "حركات العضلات اللازمة لإنتاج الكلام." },
+        { text: "Dysarthric speech is characterized as", options: ["Slurred and strained", "Clear and fluent", "Fast and loud", "Whispered"], correct: 0, wrongExplanationAr: "غير واضح ومجهد." },
+        { text: "Childhood Apraxia of speech involves errors in producing words and difficulty with", options: ["Long phrases and spontaneous sentences", "Only single sounds", "Only vowels", "Only consonants"], correct: 0, wrongExplanationAr: "العبارات الطويلة والجمل التلقائية." },
+        { text: "Stuttering is related to interruption of", options: ["Normal flow of speech", "Hearing", "Vision", "Movement"], correct: 0, wrongExplanationAr: "تدفق الكلام الطبيعي." },
+        { text: "Fluency disorders include", options: ["Stuttering", "Articulation errors", "Voice problems", "Language delay"], correct: 0, wrongExplanationAr: "التأتأة." },
+        { text: "Voice disorders involve problems with vocal", options: ["Pitch, quality, loudness", "Only volume", "Only speed", "Only rhythm"], correct: 0, wrongExplanationAr: "درجة الصوت، الجودة، الشدة." },
+        { text: "Fluency typically has relatively few", options: ["Hesitations and word repetitions", "Words", "Sentences", "Sounds"], correct: 0, wrongExplanationAr: "الترددات وتكرار الكلمات." },
+        { text: "Language comprehension includes stages beginning with", options: ["Speech perception and sound identification", "Writing", "Reading", "Signing"], correct: 0, wrongExplanationAr: "الإدراك الصوتي والتعرف على الأصوات." },
+        { text: "Morphology is the study of", options: ["Smallest meaningful units in language", "Sentence structure", "Word meaning", "Speech sounds"], correct: 0, wrongExplanationAr: "أصغر الوحدات ذات المعنى في اللغة." },
+        { text: "Pragmatics is the use of language in context including", options: ["Nonverbal communication and discourse management", "Only grammar", "Only sounds", "Only writing"], correct: 0, wrongExplanationAr: "التواصل غير اللفظي وإدارة الحوار." },
+        { text: "Semantics is the meaning of words in", options: ["Phrases or sentence contexts", "Isolation only", "Spelling only", "Sounds only"], correct: 0, wrongExplanationAr: "العبارات أو سياقات الجمل." },
+        { text: "Autism disorder is a neurodevelopmental disorder with delays in", options: ["Speech and language", "Only motor skills", "Only social skills", "Only cognitive skills"], correct: 0, wrongExplanationAr: "الكلام واللغة." },
+        { text: "Proper assessment of communication disorders involves", options: ["Comprehensive evaluation by speech-language pathologist", "Only a hearing test", "Only a vision test", "Only a blood test"], correct: 0, wrongExplanationAr: "تقييم شامل من أخصائي النطق واللغة." },
+        { text: "Comprehensive evaluation includes standardized tests, observational assessments, and", options: ["Parent/teacher interviews", "Blood tests", "MRI", "X-rays"], correct: 0, wrongExplanationAr: "مقابلات مع الوالدين/المعلمين." },
+        { text: "In dysarthria, speech production is affected in", options: ["Rate and tone as well", "Only rate", "Only tone", "Only volume"], correct: 0, wrongExplanationAr: "السرعة والنبرة أيضًا." },
+        { text: "Childhood apraxia of speech is also known as", options: ["Developmental apraxia of speech", "Dysarthria", "Stuttering", "Voice disorder"], correct: 0, wrongExplanationAr: "خلل النطق النمائي." },
+        { text: "Stuttering often involves repetitions of sounds, syllables, or words at the", options: ["Beginning of sentence", "End of sentence", "Middle of word", "Anywhere randomly"], correct: 0, wrongExplanationAr: "بداية الجملة." },
+        { text: "Voice disorders are caused by damage, disease, or deformity of the", options: ["Larynx", "Tongue", "Lips", "Ear"], correct: 0, wrongExplanationAr: "الحنجرة." }
+    ];
+    const transCh7 = [
+        { type: "ar2en", text: "اضطرابات التواصل يمكن أن تؤثر بشكل كبير على قدرة الفرد على التعبير عن نفسه وفهم الآخرين", correctEn: "Communication disorders can significantly impact an individual's ability to express themselves and comprehend others" },
+        { type: "ar2en", text: "اضطراب النطق هو اضطراب في الكلام الحركي حيث يواجه الشخص صعوبة في نطق الأصوات", correctEn: "Articulation disorder is a motor speech disorder in which a person has trouble pronouncing sounds" },
+        { type: "ar2en", text: "عسر التلفظ هو اضطراب حركي في الكلام يحدث بسبب ضعف في حركات العضلات اللازمة لإنتاج الكلام", correctEn: "Dysarthria is a motor speech disorder occurring due to impairment of muscle movements required for speech production" },
+        { type: "ar2en", text: "التأتأة هي اضطراب في تدفق الكلام الطبيعي حيث يكرر الشخص كلمات أو أصواتًا أو عبارات", correctEn: "Stuttering is an interruption of normal flow of speech where a person may repeat words, sounds, or phrases" },
+        { type: "ar2en", text: "علم الصرف هو دراسة أصغر الوحدات ذات المعنى في اللغة", correctEn: "Morphology is the study of the smallest meaningful units in language" },
+        { type: "en2ar", text: "A communication disorder is any condition that affects an individual's ability to communicate", correctAr: "اضطراب التواصل هو أي حالة تؤثر على قدرة الفرد على التواصل" },
+        { type: "en2ar", text: "Language problems can involve difficulty with grammar, vocabulary, units of word meaning, and the use of language in social contexts", correctAr: "مشكلات اللغة يمكن أن تشمل صعوبة في القواعد والمفردات ووحدات المعنى الكلمي واستخدام اللغة في السياقات الاجتماعية" },
+        { type: "en2ar", text: "Hearing loss can affect speech and language development as individuals may struggle to hear sounds", correctAr: "ضعف السمع قد يؤثر على تطور الكلام واللغة حيث قد يواجه الأفراد صعوبة في سماع الأصوات" },
+        { type: "en2ar", text: "Pragmatics includes implicit and explicit communicative intent, nonverbal communication, and social aspects of communication", correctAr: "التداولية تشمل القصد التواصلي الضمني والصريح والتواصل غير اللفظي والجوانب الاجتماعية للتواصل" },
+        { type: "en2ar", text: "Semantics is the meaning of words in phrases or sentence contexts including semantic features and referent categories", correctAr: "علم الدلالة هو معنى الكلمات في العبارات أو سياقات الجمل بما في ذلك السمات الدلالية والفئات المرجعية" }
+    ];
+    renderQuiz('quizContainer3', ch3Questions); renderTranslations('translationList3', transCh3);
+    renderQuiz('quizContainer4', ch4Questions); renderTranslations('translationList4', transCh4);
+    renderQuiz('quizContainer5', ch5Questions); renderTranslations('translationList5', transCh5);
+    renderQuiz('quizContainer7', ch7Questions); renderTranslations('translationList7', transCh7);
+    const tabs = document.querySelectorAll('.tab-btn');
+    const sections = {3: document.getElementById('chapter3'), 4: document.getElementById('chapter4'), 5: document.getElementById('chapter5'), 7: document.getElementById('chapter7')};
+    tabs.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabs.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const chap = btn.getAttribute('data-chapter');
+            Object.values(sections).forEach(sec => sec.classList.remove('active-chapter'));
+            if(chap === '3') sections[3].classList.add('active-chapter');
+            else if(chap === '4') sections[4].classList.add('active-chapter');
+            else if(chap === '5') sections[5].classList.add('active-chapter');
+            else sections[7].classList.add('active-chapter');
         });
-    }
-
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>]/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            return m;
-        });
-    }
-
-    renderMCQ();
-    renderTranslations();
-
-    const toggleBtn = document.getElementById('darkModeToggle');
-    toggleBtn.addEventListener('click', () => {
+    });
+    const darkToggle = document.getElementById('darkModeToggle');
+    darkToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
-        const isDark = document.body.classList.contains('dark-mode');
-        toggleBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i> الوضع الفاتح' : '<i class="fas fa-moon"></i> الوضع المظلم';
+        darkToggle.innerHTML = document.body.classList.contains('dark-mode') ? '<i class="fas fa-sun"></i> الوضع الفاتح' : '<i class="fas fa-moon"></i> الوضع المظلم';
     });
 </script>
 </body>
