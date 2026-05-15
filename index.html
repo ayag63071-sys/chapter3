@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>الفصل الثالث | قراءات سيكولوجية | Aya Gaber</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s;
+        }
+
+        /* خلفية مموجة متدرجة بيبي بلو وبيج */
+        body {
+            font-family: 'Cairo', 'Inter', sans-serif;
+            background: linear-gradient(135deg, #d4e4f7 0%, #f9e6d5 50%, #c7dfef 100%);
+            background-attachment: fixed;
+            position: relative;
+            color: #2c2a2a;
+            scroll-behavior: smooth;
+            padding-bottom: 3rem;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,245,235,0.25)" fill-opacity="0.4" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') repeat-x bottom;
+            background-size: cover;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Dark Mode - تحسين وضوح الكلام */
+        body.dark-mode {
+            background: linear-gradient(135deg, #121821 0%, #1e1a1f 100%);
+            color: #f0ece8;
+        }
+        body.dark-mode::before {
+            opacity: 0.08;
+        }
+        body.dark-mode .glass-card, 
+        body.dark-mode .quiz-card,
+        body.dark-mode .translation-section {
+            background: rgba(25, 28, 38, 0.7);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(210, 190, 210, 0.2);
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.4);
+        }
+        body.dark-mode .quiz-card {
+            background: rgba(30, 28, 38, 0.75);
+        }
+        body.dark-mode .question-text {
+            color: #f5eee8;
+        }
+        body.dark-mode .option {
+            background: rgba(45, 40, 55, 0.8);
+            border-color: rgba(210, 190, 210, 0.25);
+        }
+        body.dark-mode .option label {
+            color: #f2e8e2;
+        }
+        body.dark-mode .feedback.correct {
+            background: rgba(40, 70, 50, 0.7);
+            color: #c8f0c0;
+            border-right-color: #7fcc7a;
+        }
+        body.dark-mode .feedback.wrong {
+            background: rgba(90, 50, 55, 0.7);
+            color: #ffcdc2;
+            border-right-color: #e28b6f;
+        }
+        body.dark-mode .btn-submit {
+            background: linear-gradient(95deg, #5e6e85, #7b6b78);
+        }
+        body.dark-mode .trans-input {
+            background: rgba(35, 30, 45, 0.85);
+            border-color: rgba(220, 200, 220, 0.3);
+            color: #f0e6de;
+        }
+        body.dark-mode .footer-design {
+            color: #cfb9cd;
+        }
+        body.dark-mode .trans-item {
+            background: rgba(40, 35, 48, 0.65);
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* زر الوضع المظلم */
+        .dark-toggle {
+            position: fixed;
+            top: 1.2rem;
+            left: 1.5rem;
+            background: rgba(255, 250, 245, 0.75);
+            backdrop-filter: blur(12px);
+            border-radius: 3rem;
+            padding: 0.5rem 1.2rem;
+            font-weight: 600;
+            border: 1px solid rgba(210, 190, 175, 0.6);
+            cursor: pointer;
+            z-index: 100;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+        }
+        body.dark-mode .dark-toggle {
+            background: rgba(40, 35, 50, 0.8);
+            border-color: rgba(190, 160, 180, 0.5);
+            color: #f3e6dd;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 2.2rem;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #5588b1, #c28b6f, #7fa5c2);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .hero p {
+            font-size: 1rem;
+            color: #5d6e7e;
+            font-weight: 500;
+        }
+        body.dark-mode .hero p {
+            color: #cdc2b8;
+        }
+        .deco-line {
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #b1d0e8, #f0cdb0, #9bc1db);
+            margin: 0.8rem auto 0;
+            border-radius: 4px;
+        }
+
+        /* الكاردات الزجاجية */
+        .quiz-card, .translation-section {
+            background: rgba(255, 250, 245, 0.5);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08);
+        }
+        .quiz-card {
+            padding: 1.6rem 2rem;
+            margin-bottom: 1.8rem;
+        }
+        .question-text {
+            font-size: 1.28rem;
+            font-weight: 700;
+            margin-bottom: 1.4rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            color: #2e3b3e;
+        }
+        .q-num {
+            background: rgba(210, 180, 160, 0.65);
+            backdrop-filter: blur(4px);
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #4a3a2c;
+        }
+        body.dark-mode .q-num {
+            background: rgba(110, 90, 115, 0.7);
+            color: #e6d5ca;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.7rem 1rem;
+            background: rgba(255, 250, 245, 0.75);
+            backdrop-filter: blur(4px);
+            border-radius: 1.2rem;
+            border: 1px solid rgba(255, 240, 230, 0.9);
+            cursor: pointer;
+        }
+        .option:hover {
+            background: rgba(255, 245, 235, 0.95);
+            transform: scale(0.99);
+        }
+        .option input {
+            accent-color: #9bbdd4;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .option label {
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .feedback {
+            margin-top: 0.8rem;
+            padding: 0.8rem 1rem;
+            border-radius: 1.2rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            background: rgba(250, 245, 240, 0.85);
+            backdrop-filter: blur(8px);
+        }
+        .feedback.correct {
+            border-right: 5px solid #6cac70;
+            color: #2a6b2f;
+        }
+        .feedback.wrong {
+            border-right: 5px solid #d98467;
+            color: #ab5e4b;
+        }
+        body.dark-mode .feedback.correct {
+            color: #caf0c5;
+        }
+        body.dark-mode .feedback.wrong {
+            color: #ffcdc2;
+        }
+
+        /* زر التحقق (Check) بنور متدرج مموج رايح جاي */
+        .btn-submit {
+            background: linear-gradient(100deg, #aabfd9, #c7ae9a);
+            border: none;
+            padding: 0.65rem 1.8rem;
+            border-radius: 2.5rem;
+            font-weight: 700;
+            color: #2f2a24;
+            font-size: 0.9rem;
+            cursor: pointer;
+            font-family: inherit;
+            transition: 0.25s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            animation: gentleWave 2s ease-in-out infinite;
+            background-size: 150% auto;
+        }
+        @keyframes gentleWave {
+            0% { background-position: 0% 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.05);}
+            50% { background-position: 100% 50%; box-shadow: 0 4px 14px rgba(90, 70, 60, 0.15); transform: scale(1.01);}
+            100% { background-position: 0% 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.05);}
+        }
+        .btn-submit:hover {
+            transform: scale(0.97);
+            background: linear-gradient(100deg, #95acc9, #b59881);
+            animation: none;
+        }
+        body.dark-mode .btn-submit {
+            background: linear-gradient(100deg, #5f6f88, #8e7582);
+            color: #f2ece5;
+        }
+
+        /* قسم الترجمة زجاجي */
+        .translation-section {
+            padding: 2rem;
+            margin-top: 2rem;
+            backdrop-filter: blur(14px);
+        }
+        .section-title {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-right: 4px solid #9bbdd4;
+            padding-right: 1rem;
+        }
+        .trans-item {
+            background: rgba(255, 252, 248, 0.6);
+            backdrop-filter: blur(8px);
+            margin-bottom: 1.6rem;
+            padding: 1rem 1.3rem;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255,245,235,0.7);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .trans-prompt {
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        /* الأسهم الشفافة الشيك */
+        .trans-prompt i {
+            background: rgba(180, 200, 220, 0.35);
+            backdrop-filter: blur(4px);
+            padding: 0.4rem;
+            border-radius: 50%;
+            font-size: 0.9rem;
+            color: #5b7f9e;
+        }
+        body.dark-mode .trans-prompt i {
+            background: rgba(140, 120, 150, 0.4);
+            color: #d4bfe0;
+        }
+        .trans-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 1.2rem;
+            border: 1px solid #e2cfc2;
+            background: rgba(255, 252, 248, 0.9);
+            font-family: 'Inter', monospace;
+            resize: vertical;
+        }
+        .trans-feedback {
+            font-size: 0.85rem;
+            padding: 0.2rem 0;
+        }
+        .trans-btn {
+            background: linear-gradient(100deg, #aabfd9, #c7ae9a);
+            border: none;
+            padding: 0.45rem 1.4rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            color: #2c2824;
+            cursor: pointer;
+            align-self: flex-start;
+            transition: 0.2s;
+            animation: gentleWave 2s ease-in-out infinite;
+            background-size: 150% auto;
+        }
+        .trans-btn:hover {
+            transform: scale(0.96);
+            animation: none;
+        }
+        body.dark-mode .trans-btn {
+            background: linear-gradient(100deg, #5f6f88, #8e7582);
+            color: #f0e9e2;
+        }
+
+        /* توقيع Aya Gaber متدرج وشيك */
+        .footer-design {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding-top: 1rem;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #719ec2, #4c3232, #74c3ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: gentleGlow 3s ease infinite;
+        }
+        @keyframes gentleGlow {
+            0% { opacity: 0.8; text-shadow: 0 0 0px rgba(115, 145, 175, 0.2);}
+            50% { opacity: 1; text-shadow: 0 0 8px rgba(165, 135, 115, 0.3);}
+            100% { opacity: 0.8; text-shadow: 0 0 0px rgba(115, 145, 175, 0.2);}
+        }
+        body.dark-mode .footer-design {
+            background: linear-gradient(135deg, #c2b0e0, #e0bc9e, #adc6e6);
+            background-clip: text;
+            -webkit-background-clip: text;
+        }
+
+        @media (max-width: 680px) {
+            .container { padding: 1rem; }
+            .quiz-card { padding: 1.2rem; }
+            .hero h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+<button class="dark-toggle" id="darkModeToggle"><i class="fas fa-moon"></i> الوضع المظلم</button>
+<div class="container">
+    <div class="hero">
+        <h1>قراءات سيكولوجية</h1>
+        <p>الفصل الثالث: التخلف العقلي (Mental Retardation)</p>
+        <div class="deco-line"></div>
+    </div>
+
+    <div id="quizContainer"></div>
+
+    <!-- قسم الترجمة -->
+    <div class="translation-section">
+        <div class="section-title"><i class="fas fa-language"></i> تدريبات الترجمة</div>
+        <div id="translationList"></div>
+    </div>
+    
+    <div class="footer-design">
+        Aya Gaber
+    </div>
+</div>
+
+<script>
+    // 30 سؤال MCQ بالانجليزي (بدون علامات استفهام مزعجة)
+    const mcqData = [
+        { text: "Mental retardation is present in what approximate percentage of the population", options: ["1 to 2 percent", "2 to 3 percent", "4 to 5 percent", "Less than 1 percent"], correct: 1, wrongExplanationAr: "النسبة الصحيحة هي 2 إلى 3 بالمئة من السكان وفقاً للمحتوى العلمي." },
+        { text: "Mental retardation is more frequent in males due to", options: ["Autosomal dominance", "Gene mutations on X chromosome", "Y chromosome excess", "Mitochondrial disorders"], correct: 1, wrongExplanationAr: "السبب يعود إلى العديد من الطفرات الجينية في الكروموسوم X مما يجعل الذكور أكثر عرضة." },
+        { text: "Which area is NOT mentioned as a daily living skill for cognitively impaired children", options: ["Feeding", "Toileting", "Abstract reasoning", "Dressing"], correct: 2, wrongExplanationAr: "المهارات المذكورة: التغذية، استخدام المرحاض، ارتداء الملابس، والعناية الشخصية. التفكير المجرد ليس ضمنها." },
+        { text: "Problems of mentally retarded children extend to", options: ["Only learning", "Social field", "Physical growth only", "Memory only"], correct: 1, wrongExplanationAr: "لا تقتصر على التعلم فحسب بل تمتد إلى المجال الاجتماعي." },
+        { text: "One diagnostic criterion for mental retardation is onset before age", options: ["12 years", "16 years", "18 years", "21 years"], correct: 2, wrongExplanationAr: "ظهور الأعراض يجب أن يكون قبل سن الثامنة عشرة وفقاً للمعايير التشخيصية." },
+        { text: "Mental retardation involves limitations in", options: ["Intellectual and adaptive behavior", "Only motor skills", "Emotional expression only", "Sensory processing"], correct: 0, wrongExplanationAr: "إعاقة تتميز بقيود ملحوظة في الأداء الذهني والسلوك التكيفي." },
+        { text: "Which domain is NOT among the affected areas", options: ["Self care", "School performance", "Abstract symbolic play", "Health and safety"], correct: 2, wrongExplanationAr: "المجالات تشمل التواصل، الرعاية الذاتية، المهارات الاجتماعية، الأداء المدرسي، العمل، الترفيه، الصحة والسلامة." },
+        { text: "A characteristic of mentally retarded child includes IQ between", options: ["70 to 85", "90 to 100", "55 to 70", "110 to 120"], correct: 1, wrongExplanationAr: "النص يذكر أن نسبة ذكائه تتراوح بين 90 و 100 مع ضعف في السلوك التكيفي." },
+        { text: "General backwardness refers to weakness in", options: ["All school subjects", "One subject only", "Physical activities", "Social relations"], correct: 0, wrongExplanationAr: "التأخر الدراسي العام: الطفل ضعيف في جميع مواد المنهج الدراسي." },
+        { text: "Diagnosis of mental retardation depends on", options: ["Only IQ test", "Family history, physical exam and developmental assessment", "EEG only", "Blood group"], correct: 1, wrongExplanationAr: "يعتمد على التاريخ الطبي الشخصي والعائلي، الفحص البدني، والتقييم النمائي." },
+        { text: "Which behavioral factor can contribute to mental retardation", options: ["High income", "Poverty, malnutrition, maternal drugs", "Balanced diet", "Regular exercise"], correct: 1, wrongExplanationAr: "الفقر وسوء التغذية وتعاطي الأم للمخدرات والكحول تساهم في التخلف العقلي." },
+        { text: "Leading cause of mental retardation in industrialized nations is", options: ["Down syndrome", "Fetal alcohol syndrome", "Fragile X syndrome", "Hypothyroidism"], correct: 1, wrongExplanationAr: "متلازمة الكحول الجنينية هي السبب الأكثر شيوعاً بمعدل حالة لكل 100 ولادة." },
+        { text: "Second most common cause is", options: ["Fetal alcohol syndrome", "Down syndrome", "Microcephaly", "Prader Willi syndrome"], correct: 1, wrongExplanationAr: "السبب الثاني هو متلازمة داون بمعدل 1 من كل 800 إلى 1000 ولادة." },
+        { text: "First step in addressing a mentally retarded child includes", options: ["School evaluation", "Anamnesis, physical exam and family history", "Speech therapy", "Psychiatric assessment only"], correct: 1, wrongExplanationAr: "فحص التاريخ المرضي، الفحص البدني، التاريخ العائلي للأمراض العصبية والتخلف العقلي." },
+        { text: "Phase 2 includes screening for", options: ["Autism and blood tests", "Kidney function", "Bone age", "Allergy panel"], correct: 0, wrongExplanationAr: "الفحص المسحي لاضطراب طيف التوحد، تحليل دم شامل، والكشف عن إعاقات سمعية أو بصرية." },
+        { text: "To prevent mental retardation before birth avoid", options: ["Heavy physical work and unnecessary drugs", "Walking", "Drinking water", "Sleeping"], correct: 0, wrongExplanationAr: "تجنب المجهود البدني الشاق والأدوية غير الضرورية." },
+        { text: "Which should be avoided during pregnancy to prevent mental retardation", options: ["Smoking, alcohol and lead", "Vitamins", "Fruits", "Milk"], correct: 0, wrongExplanationAr: "التدخين، الكحول، مضغ التبغ، واتخاذ الاحتياطات ضد التسمم بالرصاص." },
+        { text: "Where should delivery take place to reduce risk", options: ["At home", "In a fully equipped hospital", "In a clinic without facilities", "Anywhere"], correct: 1, wrongExplanationAr: "الولادة في مستشفى مجهزة بكل المرافق وإجراء الإنعاش إذا لم يبكي الطفل." },
+        { text: "After birth to prevent mental retardation one should", options: ["Avoid immunizations", "Immunize against infectious diseases and avoid lead or head injuries", "Let child eat paint", "Slap the child face"], correct: 1, wrongExplanationAr: "التطعيم ضد الأمراض المعدية، منع لمس الطلاء والرصاص، والاحتياط من إصابات الرأس." },
+        { text: "Most causes of mental retardation have no cure but identifying etiology helps", options: ["Guarantee full recovery", "Understand prognosis and recurrence risk", "Avoid any treatment", "Speed up IQ"], correct: 1, wrongExplanationAr: "فهم التشخيص، تقدير احتمالية التكرار، والتنبؤ بالمشكلات الطبية المستقبلية." },
+        { text: "Consanguinity increases risk of mental retardation. Which area mentions it", options: ["Family medical history", "Physical therapy", "Nutrition", "School performance"], correct: 0, wrongExplanationAr: "زواج الأقارب يُذكر ضمن التاريخ العائلي كعامل مهم." },
+        { text: "Phase 4 includes arterial gasometry and", options: ["EEG if epilepsy", "Urine analysis", "CT scan", "Allergy test"], correct: 0, wrongExplanationAr: "المرحلة الرابعة: قياس غازات الدم، بحث مفصّل في التمثيل الغذائي، وتخطيط كهرباء الدماغ في حالة الصرع." },
+        { text: "A baby born with weight less than 2.5 KG needs", options: ["No intervention", "Neonatal care", "Only feeding", "Massage"], correct: 1, wrongExplanationAr: "الطفل الذي يقل وزنه عن 2.5 كجم يحتاج رعاية خاصة لحديثي الولادة." },
+        { text: "Which should be avoided after birth to prevent mental retardation", options: ["Contact with paint and lead", "Drinking clean water", "Vaccinations", "Balanced diet"], correct: 0, wrongExplanationAr: "منع الطفل من لمس الطلاء والرصاص وحبر الصحف." },
+        { text: "What may cause eardrum injury leading to possible harm", options: ["Slapping child on face", "Loud music", "Ear infection", "Crying"], correct: 0, wrongExplanationAr: "لا تصفع الطفل على وجهه فقد يسبب إصابة في طبلة الأذن." },
+        { text: "Clean drinking water and balanced diet help prevent mental retardation", options: ["Before birth only", "After birth", "Only during adolescence", "Only genetic"], correct: 1, wrongExplanationAr: "بعد الولادة يجب توفير غذاء متوازن ومياه شرب نظيفة." },
+        { text: "Tetanus injections for pregnant women prevent", options: ["Infections that may affect fetus", "Genetic disorders", "Obesity", "Diabetes"], correct: 0, wrongExplanationAr: "جميع الحوامل يجب أن يأخذن لقاح التيتانوس للوقاية من الالتهابات." },
+        { text: "If baby does not cry immediately after birth necessary action", options: ["Wait", "Resuscitation measures", "Feed immediately", "Bathe"], correct: 1, wrongExplanationAr: "يجب القيام بإجراءات الإنعاش على الفور." },
+        { text: "Screening for auditive and visual impairments occurs in which phase", options: ["Phase 1", "Phase 2", "Phase 3", "Phase 4"], correct: 1, wrongExplanationAr: "المرحلة الثانية تشمل الكشف عن الإعاقات السمعية والبصرية." },
+        { text: "Detailed metabolic research is performed in Phase", options: ["2", "3", "4", "1"], correct: 2, wrongExplanationAr: "المرحلة الرابعة: بحث مفصّل في التمثيل الغذائي." }
+    ];
+
+    let selections = new Array(mcqData.length).fill(null);
+
+    function renderMCQ() {
+        const container = document.getElementById('quizContainer');
+        if (!container) return;
+        container.innerHTML = '';
+        mcqData.forEach((q, idx) => {
+            const card = document.createElement('div');
+            card.className = 'quiz-card';
+            const qNumber = idx + 1;
+            const qDiv = document.createElement('div');
+            qDiv.className = 'question-text';
+            qDiv.innerHTML = `<span class="q-num">Q${qNumber}</span> ${escapeHtml(q.text)}`;
+            card.appendChild(qDiv);
+            const optsDiv = document.createElement('div');
+            optsDiv.className = 'options';
+            q.options.forEach((opt, optIdx) => {
+                const optWrap = document.createElement('div');
+                optWrap.className = 'option';
+                const radioId = `mcq_${idx}_opt${optIdx}`;
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = `mcq_${idx}`;
+                radio.value = optIdx;
+                radio.id = radioId;
+                radio.addEventListener('change', () => { selections[idx] = optIdx; });
+                const label = document.createElement('label');
+                label.htmlFor = radioId;
+                label.innerText = opt;
+                optWrap.appendChild(radio);
+                optWrap.appendChild(label);
+                optsDiv.appendChild(optWrap);
+            });
+            card.appendChild(optsDiv);
+            const submitBtn = document.createElement('button');
+            submitBtn.innerText = 'Check';
+            submitBtn.className = 'btn-submit';
+            submitBtn.addEventListener('click', () => {
+                const selected = selections[idx];
+                if (selected === undefined || selected === null) {
+                    const temp = document.createElement('div');
+                    temp.className = 'feedback wrong';
+                    temp.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please select an answer first';
+                    const old = card.querySelector('.feedback');
+                    if (old) old.remove();
+                    card.appendChild(temp);
+                    setTimeout(() => { if(temp.parentNode) temp.remove(); }, 1600);
+                    return;
+                }
+                const isCorrect = (selected === q.correct);
+                const feedbackDiv = document.createElement('div');
+                feedbackDiv.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
+                if (isCorrect) {
+                    feedbackDiv.innerHTML = `<i class="fas fa-check-circle"></i> ✅ Correct<br><div style="margin-top:5px;">📘 ${escapeHtml(q.wrongExplanationAr)}</div>`;
+                } else {
+                    const correctAnswerText = q.options[q.correct];
+                    feedbackDiv.innerHTML = `<i class="fas fa-times-circle"></i> ❌ Incorrect. Correct answer: <strong>${escapeHtml(correctAnswerText)}</strong><br><div style="margin-top:5px;">📌 ${escapeHtml(q.wrongExplanationAr)}</div>`;
+                }
+                const oldFeedback = card.querySelector('.feedback');
+                if (oldFeedback) oldFeedback.remove();
+                card.appendChild(feedbackDiv);
+            });
+            card.appendChild(submitBtn);
+            container.appendChild(card);
+        });
+    }
+
+    // الترجمة: الأسهم الشفافة والسؤال تحت النص وليس جنبه
+    const translationExercises = [
+        { type: "ar2en", text: "التخلف العقلي هو اضطراب وراثي يظهر في صورة انخفاض ملحوظ عن المتوسط في القدرة العقلية العامة", correctEn: "Mental retardation is a genetic disorder manifested in significantly below average overall intellectual functioning" },
+        { type: "ar2en", text: "غالباً ما يظهر على هؤلاء الأطفال تأخر في الكلام أو اضطرابات سلوكية", correctEn: "These children often present with speech delay or behavioral disorders" },
+        { type: "ar2en", text: "يتم تشخيص التخلف العقلي بناءً على ثلاثة معايير: ظهور الأعراض قبل سن الثامنة عشرة", correctEn: "The diagnosis of mental retardation is established according to three criteria: onset of symptoms before the age of 18 years" },
+        { type: "ar2en", text: "الفحص البدني والتاريخ الطبي العائلي يساعدان في تحديد الأسباب", correctEn: "Physical examination and family medical history help determine the causes" },
+        { type: "ar2en", text: "الحرمان الشديد من المحفزات يمكن أن يساهم في التخلف العقلي", correctEn: "Severe stimulus deprivation can contribute to mental retardation" },
+        { type: "en2ar", text: "The most common cause of mental retardation in industrialized nations is fetal alcohol syndrome", correctAr: "السبب الأكثر شيوعاً للتخلف العقلي في الدول الصناعية هو متلازمة الكحول الجنينية" },
+        { type: "en2ar", text: "Down syndrome is the second cause with an incidence rate of 1 in 800-1000 births", correctAr: "متلازمة داون هي السبب الثاني بمعدل إصابة يتراوح بين حالة لكل 800 إلى 1000 ولادة" },
+        { type: "en2ar", text: "Parents need assistance in promoting normal developmental skills such as feeding and toileting", correctAr: "يحتاج الآباء المساعدة في تعزيز المهارات النمائية الطبيعية مثل التغذية واستخدام المرحاض" },
+        { type: "en2ar", text: "Intellectual function significantly lower than average with an IQ equal to or less than 70", correctAr: "انخفاض الأداء الذهني بشكل ملحوظ عن المتوسط بحيث يكون معامل الذكاء مساوياً لـ 70 أو أقل" },
+        { type: "en2ar", text: "Precautions should be taken against head injury and accidents after birth", correctAr: "يجب اتخاذ الاحتياطات اللازمة للوقاية من إصابات الرأس والحوادث بعد الولادة" }
+    ];
+
+    function renderTranslations() {
+        const container = document.getElementById('translationList');
+        if (!container) return;
+        container.innerHTML = '';
+        translationExercises.forEach((ex, idx) => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'trans-item';
+            const prompt = document.createElement('div');
+            prompt.className = 'trans-prompt';
+            if (ex.type === 'ar2en') {
+                prompt.innerHTML = `<i class="fas fa-long-arrow-alt-right"></i> <span>${escapeHtml(ex.text)}</span>`;
+            } else {
+                prompt.innerHTML = `<i class="fas fa-long-arrow-alt-left"></i> <span style="direction: ltr; display: inline-block;">${escapeHtml(ex.text)}</span>`;
+            }
+            const textarea = document.createElement('textarea');
+            textarea.rows = 2;
+            textarea.className = 'trans-input';
+            textarea.placeholder = 'اكتب ترجمتك هنا...';
+            const feedbackSpan = document.createElement('div');
+            feedbackSpan.className = 'trans-feedback';
+            const checkBtn = document.createElement('button');
+            checkBtn.innerText = 'Check';
+            checkBtn.className = 'trans-btn';
+            checkBtn.addEventListener('click', () => {
+                const userAnswer = textarea.value.trim();
+                let isCorrect = false;
+                let correctAnswerText = '';
+                if (ex.type === 'ar2en') {
+                    correctAnswerText = ex.correctEn;
+                    const normUser = userAnswer.replace(/[.,!?;:]/g, '').replace(/\s+/g, ' ').toLowerCase();
+                    const normCorrect = correctAnswerText.replace(/[.,!?;:]/g, '').replace(/\s+/g, ' ').toLowerCase();
+                    isCorrect = normUser === normCorrect || (normCorrect.includes(normUser) && normUser.length > 15) || (normUser.includes(normCorrect.substring(0, 40)));
+                } else {
+                    correctAnswerText = ex.correctAr;
+                    const cleanUser = userAnswer.replace(/[.,!?;:،؟]/g, '').replace(/\s+/g, ' ').trim();
+                    const cleanCorrect = correctAnswerText.replace(/[.,!?;:،؟]/g, '').replace(/\s+/g, ' ').trim();
+                    isCorrect = cleanUser === cleanCorrect || (cleanCorrect.includes(cleanUser) && cleanUser.length > 12);
+                }
+                feedbackSpan.innerHTML = isCorrect ? '<span style="color:#4c8b4a;">✅ Correct! Excellent translation.</span>' : `<span style="color:#c2594b;">❌ Not accurate. Model answer: “${escapeHtml(correctAnswerText)}”</span>`;
+            });
+            itemDiv.appendChild(prompt);
+            itemDiv.appendChild(textarea);
+            itemDiv.appendChild(checkBtn);
+            itemDiv.appendChild(feedbackSpan);
+            container.appendChild(itemDiv);
+        });
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    renderMCQ();
+    renderTranslations();
+
+    const toggleBtn = document.getElementById('darkModeToggle');
+    toggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        toggleBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i> الوضع الفاتح' : '<i class="fas fa-moon"></i> الوضع المظلم';
+    });
+</script>
+</body>
+</html>
